@@ -1,9 +1,6 @@
 import React from "react";
 
-
-
-export default ()=>{
-
+const HotCombo = () => {
     return (
         <section className="hot-combos">
             <div className="container">
@@ -44,3 +41,5 @@ export default ()=>{
         </section>
     )
 }
+
+export default HotCombo

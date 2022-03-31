@@ -1,7 +1,6 @@
 import React from "react";
 
-export default ()=>{
-
+const AboutSeparator = () => {
     return (
      
         <section className="about-separator">
@@ -14,3 +13,5 @@ export default ()=>{
         </section>
     )
 }
+
+export default AboutSeparator

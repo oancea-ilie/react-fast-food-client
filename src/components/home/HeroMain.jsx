@@ -1,7 +1,7 @@
 import React from "react";
 import bgImg from "../../assets/img/hero-img.png"
 
-export default ()=>{
+const HeroMain = () => {
 
     return (
         <section className="hero">
@@ -21,3 +21,6 @@ export default ()=>{
         </section>
     )
 }
+
+
+export default HeroMain

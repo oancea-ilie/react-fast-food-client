@@ -2,8 +2,8 @@ import React from "react";
 import delivery1 from "../../assets/img/delivery-img-1.png"
 import delivery2 from "../../assets/img/delivery-img-2.png"
 
-export default ()=>{
 
+const Delivery = () => {
 
     return (
         <section className="delivery">
@@ -22,3 +22,5 @@ export default ()=>{
         </section>
     )
 }
+
+export default Delivery

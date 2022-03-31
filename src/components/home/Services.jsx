@@ -4,10 +4,7 @@ import service2 from "../../assets/img/service-icon-2.png"
 import service3 from "../../assets/img/service-icon-3.png"
 import service4 from "../../assets/img/service-icon-4.png"
 
-
-
-export default ()=>{
-
+const Services = () => {
     return (
         <section className="service">
         <div className="container">
@@ -36,3 +33,5 @@ export default ()=>{
     </section>
     )
 }
+
+export default Services

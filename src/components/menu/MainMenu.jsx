@@ -3,8 +3,7 @@ import ContainerMenu from "./ContainerMenu";
 import HeroMenu from "./HeroMenu";
 import MenuProducts from "./MenuProducts";
 
-
-export default ()=>{
+const MainMenu = () => {
 
 
     return (
@@ -15,3 +14,5 @@ export default ()=>{
         </main>
     )
 }
+
+export default MainMenu

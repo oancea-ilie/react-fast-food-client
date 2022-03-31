@@ -4,11 +4,9 @@ import chef2 from "../../assets/img/about-chef-2.jpg"
 import chef3 from "../../assets/img/about-chef-3.jpg"
 import chef4 from "../../assets/img/about-chef-4.jpg"
 
-export default ()=>{
-
+const OurChef = () => {
     return (
-        
-        
+    
         <section className="our-chef">
 
             <div className="title">
@@ -43,3 +41,5 @@ export default ()=>{
         </section>
     )
 }
+
+export default OurChef

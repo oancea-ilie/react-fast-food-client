@@ -6,8 +6,7 @@ import OurChef from "./OurChef";
 import ServiceAbout from "./ServiceAbout";
 import TextImg from "./TextImg";
 
-export default ()=>{
-
+const MainAbout = () => {
     return (
 
         <main className="main-about-us">
@@ -20,3 +19,5 @@ export default ()=>{
         </main>
     )
 }
+
+export default MainAbout

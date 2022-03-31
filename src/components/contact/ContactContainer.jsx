@@ -1,8 +1,6 @@
 import React from "react";
 
-
-export default ()=>{
-
+const ContactContainer = () => {
     return (
         <div className="bg-fixer">
 
@@ -51,3 +49,5 @@ export default ()=>{
     </div>
     )
 }
+
+export default ContactContainer

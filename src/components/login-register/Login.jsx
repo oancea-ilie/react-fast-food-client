@@ -1,9 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-
-export default ()=>{
-
+const Login = () => {
     return (
         <section className="login">
             <div className="container">
@@ -19,3 +17,5 @@ export default ()=>{
         </section>
     )
 }
+
+export default Login

@@ -2863,7 +2863,7 @@ footer .footer-footer p span:hover {
 
 .cart-hero {
   height: 460px;
-  background-image: url(../../img/bg-home.jpg);
+  background-image: url(./assets/img/bg-home.jpg);
   background-position: center center;
   background-size: cover;
   display: flex;

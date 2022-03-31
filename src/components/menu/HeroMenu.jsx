@@ -1,9 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export default ()=>{
-
-    return (
+const HeroMenu = () => {
+   return (
         <section className="menu-hero">
             <h1>Menu </h1>
             
@@ -15,3 +14,4 @@ export default ()=>{
         </section>
     )
 }
+export default HeroMenu

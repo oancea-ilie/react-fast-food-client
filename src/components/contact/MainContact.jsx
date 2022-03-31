@@ -2,9 +2,7 @@ import React from "react";
 import ContactContainer from "./ContactContainer";
 import ContactHero from "./ContactHero";
 
-
-export default ()=>{
-
+const MainContact = () => {
     return (
         <main className="main-contact">
             <ContactHero/>
@@ -12,3 +10,5 @@ export default ()=>{
         </main>
     )
 }
+
+export default MainContact

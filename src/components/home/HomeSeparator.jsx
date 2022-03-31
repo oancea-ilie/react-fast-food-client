@@ -1,10 +1,6 @@
 import React from "react";
 
-
-
-export default ()=>{
-
-
+const HomeSeparator = () => {
     return (
         <section className="separator">
             <div className="container">
@@ -29,3 +25,5 @@ export default ()=>{
         </section>
     )
 }
+
+export default HomeSeparator

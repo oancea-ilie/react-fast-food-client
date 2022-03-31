@@ -1,9 +1,7 @@
 import React from "react";
 import logo2 from "../assets/img/logo-2.png"
 
-
-export default ()=>{
-
+const Footer = () => {
     return (
         <footer>
         
@@ -51,3 +49,5 @@ export default ()=>{
     </footer>
     )
 }
+
+export default Footer

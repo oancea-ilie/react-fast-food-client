@@ -5,10 +5,7 @@ import Product3 from "../../assets/img/product-cartofi.jpg"
 import Product4 from "../../assets/img/product-coca-cola.jpg"
 import Product5 from "../../assets/img/product-burger.jpg"
 
-
-export default ()=>{
-
-
+const Produse = () => {
     return (
         <section className="products">
 
@@ -69,3 +66,6 @@ export default ()=>{
         </section>
     )
 }
+
+
+export default Produse

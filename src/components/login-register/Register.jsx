@@ -1,9 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-
-export default ()=>{
-
+const Register = () => {
     return (
         <section class="register">
             <div class="container">
@@ -21,3 +19,4 @@ export default ()=>{
         </section>
     )
 }
+export default Register

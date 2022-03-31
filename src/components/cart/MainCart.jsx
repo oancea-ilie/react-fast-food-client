@@ -2,8 +2,7 @@ import React from "react";
 import ContainerCart from "./ContainerCart";
 import HeroCart from "./HeroCart";
 
-export default ()=>{
-
+const MainCart = () => {
     return(
         <main className="main-cart">
             <HeroCart/>
@@ -11,3 +10,5 @@ export default ()=>{
         </main>
     )
 }
+
+export default MainCart

@@ -1,8 +1,6 @@
 import React from "react";
 
-
-export default ()=>{
-
+const Oferte = () => {
     return (
         <section className="oferte">
             <div className="container">
@@ -31,3 +29,5 @@ export default ()=>{
         </section>
     )
 }
+
+export default Oferte

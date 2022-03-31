@@ -1,9 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export default ()=>{
-
-    return (
+const HeroAboutUs = () => {
+ return (
         <section className="about-hero">
             <h1>About Us</h1>
             
@@ -15,3 +14,5 @@ export default ()=>{
         </section>
     )
 }
+
+export default HeroAboutUs

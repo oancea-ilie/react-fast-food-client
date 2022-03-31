@@ -2,8 +2,8 @@ import React from "react";
 import Cartofi from "../../assets/img/product-cartofi.jpg"
 import Burger from "../../assets/img/product-burger.jpg";
 
-export default ()=>{
-
+const ContainerCart = () => {
+    
     return (
         <div className="container">
 
@@ -21,7 +21,7 @@ export default ()=>{
                     </thead>
                     <tbody>
                         <tr>
-                            <td><img src={Cartofi}/></td>
+                            <td><img src={Cartofi} alt=""/></td>
                             <td>Burger</td>
                             <td>$25</td>
                             <td><input type="text" placeholder="1" disabled/><div className="plus-minus"><div className="plus">+</div> <div className="minus">-</div></div></td>
@@ -29,7 +29,7 @@ export default ()=>{
                             <td>x</td>
                         </tr>
                         <tr>
-                            <td><img src={Burger}/></td>
+                            <td><img src={Burger} alt=""/></td>
                             <td>Burger</td>
                             <td>$25</td>
                             <td><input type="text" placeholder="1" disabled/><div className="plus-minus"><div className="plus">+</div> <div className="minus">-</div></div></td>
@@ -52,3 +52,5 @@ export default ()=>{
         </div>
     )
 }
+
+export default ContainerCart

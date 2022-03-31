@@ -7,8 +7,7 @@ import Oferte from "./Oferte";
 import Produse from "./Produse";
 import Services from "./Services";
 
-export default ()=>{
-    
+const MainHome = () => {
     return (
         <main className="main-home">
             <HeroMain/>
@@ -21,3 +20,5 @@ export default ()=>{
         </main>
     )
 }
+
+export default MainHome

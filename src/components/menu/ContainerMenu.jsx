@@ -1,7 +1,6 @@
 import React from "react";
 
-export default ()=>{
- 
+const ContainerMenu = () => {
     return(
         
         <div className="margin-fix">
@@ -56,3 +55,5 @@ export default ()=>{
         </div>
     )
 }
+
+export default ContainerMenu

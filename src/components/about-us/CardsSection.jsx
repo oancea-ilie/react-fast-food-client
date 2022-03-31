@@ -3,8 +3,7 @@ import card1 from "../../assets/img/about-card-1.jpg"
 import card2 from "../../assets/img/about-card-2.jpg"
 import card3 from "../../assets/img/about-card-3.jpg"
 
-export default ()=>{
-
+const CardsSection = () => {
     return (
         
         <section className="cards-sections">
@@ -28,3 +27,5 @@ export default ()=>{
         </section>
     )
 }
+
+export default CardsSection

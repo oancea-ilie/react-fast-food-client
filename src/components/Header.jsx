@@ -4,10 +4,8 @@ import Logo2 from "../assets/img/logo-2.png"
 import Logo1 from "../assets/img/logo-1024.png"
 import {FiMenu} from "react-icons/fi"
 import {GrClose} from "react-icons/gr"
-import { bounceInDown } from 'react-animations';
-import Radium, {StyleRoot} from 'radium';
 
-export default ()=>{
+const Header = () => {
 
     let [toggle, setToggle] = useState(false);
 
@@ -22,13 +20,6 @@ export default ()=>{
         }
         if(window.innerWidth>=768){
             setToggle(false);
-        }
-    }
-
-    const styles = {
-        bounceInDown: {
-          animation: 'x 2s',
-          animationName: Radium.keyframes(bounceInDown, 'bounceInDown')
         }
     }
 
@@ -68,7 +59,7 @@ export default ()=>{
             
             {
                 toggle?             
-                <div className="nav-toggle" style={styles.bounceInDown}>
+                <div className="nav-toggle">
                     <Link to={"/"} className="active">Home</Link>
                     <Link to={"/menu"}>Menu</Link>
                     <Link to={"/about-us"}>About Us</Link>
@@ -79,3 +70,5 @@ export default ()=>{
         </header>
     )
 }
+
+export default Header

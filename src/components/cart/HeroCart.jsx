@@ -1,7 +1,6 @@
 import React from "react";
 
-
-export default ()=>{
+const HeroCart = () => {
     return(
         <div class="cart-hero">
             <h1>Cart</h1>
@@ -14,3 +13,5 @@ export default ()=>{
         </div>
     )
 }
+
+export default HeroCart

@@ -2,8 +2,8 @@ import React from "react";
 import About1 from "../../assets/img/about-img-1.jpg"
 import About2 from "../../assets/img/about-img-2.jpg"
 
-export default ()=>{
-
+const TextImg = () => {
+    
     return (
         
         <section className="text-img">
@@ -19,3 +19,4 @@ export default ()=>{
         </section>
     )
 }
+export default TextImg
