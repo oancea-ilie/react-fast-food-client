@@ -8,6 +8,8 @@ import MainContact from "./components/contact/MainContact"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Register from "./components/login-register/Register";
 import Login from "./components/login-register/Login";
+import MainCart from "./components/cart/MainCart";
+
 export default ()=>{
 
 
@@ -21,7 +23,7 @@ export default ()=>{
         <Route exact path={"/contact"}><MainContact/></Route>
         <Route exact path={"/register"}><Register/></Route>
         <Route exact path={"/login"}><Login/></Route>
-
+        <Route exact path={"/cart"}><MainCart/></Route>
       </Switch>
       <Footer/>
     </Router>

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 
 export default ()=>{
@@ -12,7 +13,7 @@ export default ()=>{
                     <input type="email" placeholder="Email"/>
                     <input type="password" placeholder="Password"/>
                     <a href="#" className="login-btn">Login</a>
-                    <a href="#" className="register-btn">Register</a>
+                    <Link to={"/register"} className="register-btn">Register</Link>
                 </div>
             </div>
         </section>

@@ -55,8 +55,8 @@ export default ()=>{
                         <Link to={"/"} className="active">Home</Link>
                         <Link to={"/menu"}>Menu</Link>
                         <Link to={"/about-us"}>About Us</Link>
-                        <Link to={"contact"}>Contact</Link>
-                        
+                        <Link to={"/contact"}>Contact</Link>
+                        <Link to={"/login"} className="header-login-btn">Login</Link>
                         <div className="order-now">
                             <h1>Order now</h1>
                             <a href="#">1800 456 7890</a>
@@ -73,6 +73,7 @@ export default ()=>{
                     <Link to={"/menu"}>Menu</Link>
                     <Link to={"/about-us"}>About Us</Link>
                     <Link to={"contact"}>Contact</Link>
+                    <Link to={"/login"} className="header-login-btn toggle-login-btn">Login</Link>
                 </div>: ""
             }
         </header>

@@ -2844,3 +2844,221 @@ footer .footer-footer p span:hover {
 .login .container .form .register-btn:hover {
   color: white;
 }
+
+.header-login-btn{
+  border: 1px solid white;
+  padding: 0.1rem 2rem;
+}
+.header-login-btn:hover{
+  background-color: white;
+  color: #a41a13 !important;
+}
+.toggle-login-btn{
+  width: 30%;
+  text-align: center;
+  padding: 0.2rem 2rem !important;
+  margin-bottom: 1rem;
+}
+
+
+.cart-hero {
+  height: 460px;
+  background-image: url(../../img/bg-home.jpg);
+  background-position: center center;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.cart-hero h1 {
+  font-family: "Playfair Display", serif;
+  font-size: 2.2rem;
+  color: white;
+  font-weight: 600;
+}
+.cart-hero .link-cards {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+}
+.cart-hero .link-cards p {
+  color: white;
+  margin: 0 0.7rem;
+}
+.cart-hero .link-cards a {
+  font-size: 0.9rem;
+  color: white;
+  background-color: none;
+}
+.cart-hero .link-cards .active {
+  color: #de9692;
+  transition: 0.4s all;
+}
+.cart-hero .link-cards .active:hover {
+  color: white;
+}
+@media (min-width: 500px) {
+  .cart-hero h1 {
+    font-size: 2.6rem;
+  }
+}
+@media (min-width: 600px) {
+  .cart-hero {
+    height: 370px;
+  }
+}
+@media (min-width: 768px) {
+  .cart-hero h1 {
+    font-size: 3.8rem;
+  }
+}
+
+.container .table-container {
+  margin: 0 1rem;
+  margin-top: 5rem;
+  overflow-x: auto;
+}
+.container .table-container table {
+  border: 1px solid #ebebeb;
+}
+.container .table-container table thead {
+  background-color: #f5f5f5fd;
+}
+.container .table-container table thead tr {
+  display: flex;
+  align-items: center;
+}
+.container .table-container table thead tr th {
+  border-right: 1px solid #ebebeb;
+  width: 150px;
+  padding: 1rem 0;
+  color: black;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+.container .table-container table tbody tr {
+  display: flex;
+}
+.container .table-container table tbody tr td {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 140px;
+  border-right: 1px solid #ebebeb;
+  border-bottom: 1px solid #ebebeb;
+  width: 150px;
+  padding: 1rem 0;
+  color: black;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+.container .table-container table tbody tr td img {
+  width: auto;
+}
+.container .table-container table tbody tr td input {
+  width: 50px;
+  height: 50px;
+  border-radius: 0;
+  font-size: 1.3rem;
+  text-align: center;
+  border: 1px solid #ebebeb;
+}
+.container .table-container table tbody tr td .plus-minus {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.3rem;
+  width: 30px;
+  height: 50px;
+  background-color: #ebebeb;
+}
+.container .table-container table tbody tr td .plus-minus .plus {
+  margin-top: 0.2rem;
+  cursor: pointer;
+  transition: 0.4s all;
+}
+.container .table-container table tbody tr td .plus-minus .minus {
+  cursor: pointer;
+  transition: 0.4s all;
+}
+.container .table-container table tbody tr td .plus-minus .plus:hover {
+  color: #a41a13;
+}
+.container .table-container table tbody tr td .plus-minus .minus:hover {
+  color: #a41a13;
+}
+.container .total-container {
+  margin: 0 1rem;
+  margin-top: 3rem;
+  margin-bottom: 5rem;
+}
+.container .total-container .total-card {
+  border: 1px solid #ebebeb;
+}
+.container .total-container .total-card h1 {
+  background-color: #f5f5f5fd;
+  padding: 0.8rem 1.5rem;
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+.container .total-container .total-card p {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  font-size: 1.1rem;
+  border-top: 1px solid #ebebeb;
+}
+.container .total-container .total-card p span {
+  font-size: inherit;
+}
+.container .total-container .total-card .free {
+  color: forestgreen;
+}
+.container .total-container .total-card p:last-of-type {
+  border-bottom: 1px solid #ebebeb;
+}
+.container .total-container .total-card p:last-of-type span {
+  font-weight: 600;
+}
+.container .total-container .total-card a {
+  margin: 1rem 0;
+  display: block;
+  font-size: 1.1rem;
+  color: white;
+  width: 230px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: 1rem;
+  background-color: #a41a13;
+  border-radius: 30px;
+  padding: 0.5rem 2.5rem;
+  transition: 0.4s all;
+}
+.container .total-container .total-card a:hover {
+  background-color: #eec300;
+}
+@media (min-width: 768px) {
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .container .table-container table thead tr th {
+    width: 190px;
+    padding: 1.5rem 0;
+  }
+  .container .table-container table tbody tr td {
+    width: 190px;
+    height: 170px;
+  }
+  .container .total-container {
+    width: 500px;
+    margin-left: auto;
+  }
+}
+@media (min-width: 1024px) {
+  .container .total-container {
+    margin-right: 2.4rem;
+  }
+}

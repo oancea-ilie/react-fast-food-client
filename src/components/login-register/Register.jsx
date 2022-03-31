@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 
 export default ()=>{
@@ -14,7 +15,7 @@ export default ()=>{
                     <input type="password" placeholder="Password"/>
                     <input type="password" placeholder="Confirm Password"/>
                     <a href="#" class="register-btn">Register</a>
-                    <a href="#" class="login-btn">Already have an account?</a>
+                    <Link to={"/login"} class="login-btn">Already have an account?</Link>
                 </div>
             </div>
         </section>
