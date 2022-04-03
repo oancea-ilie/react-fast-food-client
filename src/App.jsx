@@ -10,22 +10,25 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Register from "./components/login-register/Register";
 import Login from "./components/login-register/Login";
 import MainCart from "./components/cart/MainCart";
+import UserProvider from "./components/Context";
 
 const App = () => {
   
   return(
     <Router>
-    <Header />
-    <Switch>
-      <Route exact path={"/"}><MainHome /></Route>
-      <Route exact path={"/menu"}><MainMenu /></Route>
-      <Route exact path={"/about-us"}><MainAbout /></Route>
-      <Route exact path={"/contact"}><MainContact /></Route>
-      <Route exact path={"/register"}><Register /></Route>
-      <Route exact path={"/login"}><Login /></Route>
-      <Route exact path={"/cart"}><MainCart /></Route>
-    </Switch>
-    <Footer />
+      <UserProvider>
+        <Header/>
+        <Switch>
+          <Route exact path={"/"}><MainHome /></Route>
+          <Route exact path={"/menu"}><MainMenu /></Route>
+          <Route exact path={"/about-us"}><MainAbout /></Route>
+          <Route exact path={"/contact"}><MainContact /></Route>
+          <Route exact path={"/register"}><Register /></Route>
+          <Route exact path={"/login"}><Login /></Route>
+          <Route exact path={"/cart"}><MainCart /></Route>
+        </Switch>
+        <Footer/>
+    </UserProvider>
   </Router>
   )
 

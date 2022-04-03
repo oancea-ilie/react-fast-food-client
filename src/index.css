@@ -367,7 +367,7 @@ template {
 * input:focus {
   border: 1px solid #eec300;
 }
-* img, * svg {
+* img{
   width: 100%;
   max-width: 100%;
 }
@@ -422,6 +422,18 @@ header .container .fa-bars {
 header .container .fa-bars:hover {
   border-radius: 10px;
 }
+.header-login .container .fa-bars {
+  width: auto;
+  height: auto;
+  font-size: 1.5rem;
+  background-color: #eec300;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  transition: 0.3s all;
+}
+.header-login .container .fa-bars:hover {
+  border-radius: 10px;
+}
 header .container nav {
   display: none;
 }
@@ -457,6 +469,9 @@ header .nav-toggle a:hover {
   header .container .fa-bars {
     display: none;
   }
+  .header-login .container .fa-bars {
+    display: none;
+  }
   header .container nav {
     display: flex;
     gap: 1.5rem;
@@ -465,7 +480,7 @@ header .nav-toggle a:hover {
   header .container nav a {
     color: white;
     font-size: 1rem;
-    font-weight: bold;
+    font-weight: 400;
     transition: 0.3s all;
   }
   header .container nav a:hover {
@@ -477,7 +492,7 @@ header .nav-toggle a:hover {
     padding-left: 1rem;
   }
   header .container nav .order-now h1 {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.1rem;
     color: #eec300;
     font-size: 1rem;
   }
@@ -2844,17 +2859,156 @@ footer .footer-footer p span:hover {
 .login .container .form .register-btn:hover {
   color: white;
 }
+.header-login {
+  background-color: #a41a13;
+  position: relative;
+}
+.header-login .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 1.5rem;
+  padding: 0.5rem 0;
+}
+.header-login .container img {
+  margin-top: 0.5rem;
+  width: 100px;
+}
+.header-login .container nav {
+  display: none;
+}
+.header-login .container nav .active {
+  color: #eec300;
+}
+.header-login .nav-toggle {
+  border-top: 1px solid rgba(255, 255, 255, 0.219);
+  background-color: #a41a13;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 1rem;
+  transition: 1s all;
+}
+.header-login .nav-toggle a {
+  color: white;
+  padding: 0.5rem;
+  font-size: 1.2rem;
+  transition: 0.3s all;
+}
+.header-login .nav-toggle a:hover {
+  color: #eec300;
+}
+@media (min-width: 768px) {
+  .header-login {
+    box-shadow: 0px 5px 4px 0px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 999;
+  }
+  .header-login .container {
+    border: none;
+  }
+  .header-login .container .fa-bars {
+    display: none;
+  }
+  .header-login .container nav {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+  }
+  .header-login .container nav a {
+    color: white;
+    font-size: 1rem;
+    font-weight: 400;
+    transition: 0.3s all;
+  }
+  .header-login .container nav a:hover {
+    color: #eec300;
+  }
+  .header-login .container nav .user-deatils {
+    padding: 0.5rem 0;
+    border-left: 1px solid #cacaca83;
+    padding-left: 1rem;
+    display: flex;
+    align-items: center;
+    transition: 0.3s all;
+  }
+  .header-login .container nav .user-deatils svg {
+    margin-top: 0.3rem;
+    font-size: 2rem;
+    background-color: transparent;
+    color: white;
+    cursor: pointer;
+  }
+  .header-login .container nav .user-deatils svg:hover {
+    color: #eec300;
+  }
+  .header-login .container nav .user-deatils .user-btn {
+    margin-left: 1rem;
+    color: white;
+  }
+  .header-login .container nav .user-deatils .cart-btn {
+    margin-right: 0.8rem;
+  }
+  .header-login .container nav .user-deatils .text h3 {
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 300;
+    margin-bottom: 0.1rem;
+  }
+  .header-login .container nav .user-deatils .text p {
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 300;
+  }
+  .header-login .container nav .user-deatils .text p span {
+    font-size: 0.8rem;
+    font-weight: 300;
+  }
+}
+@media (min-width: 1024px) {
+  .header-login .container {
+    position: relative;
+    margin: 0 auto;
+    max-width: 1400px;
+    padding: 1.5rem 2rem;
+  }
+  .header-login .container img {
+    margin-top: 0;
+    width: 150px;
+    position: absolute;
+    top: 0;
+  }
+  .header-login .container nav a {
+    font-size: 1.2rem;
+    font-weight: 400;
+  }
+  .header-login .container nav .order-now a {
+    font-weight: bold;
+  }
+  .header-login .container nav .user-deatils svg {
+    font-size: 2.3rem;
+  }
+  .header-login .container nav .user-deatils .text h3 {
+    font-size: 1rem;
+  }
+  .header-login .container nav .user-deatils .text p {
+    font-size: 1rem;
+  }
+  .header-login .container nav .user-deatils .text p span {
+    font-size: 1rem;
+  }
+}
+@media (min-width: 1600px) {
+  .header-login .container nav .order-now a {
+    font-size: 1.4rem;
+  }
+}
 
-.header-login-btn{
-  border: 1px solid white;
-  padding: 0.1rem 2rem;
-}
-.header-login-btn:hover{
-  background-color: white;
-  color: #a41a13 !important;
-}
 .toggle-login-btn{
-  width: 30%;
+  width: 150px;
   text-align: center;
   padding: 0.2rem 2rem !important;
   margin-bottom: 1rem;
@@ -2914,22 +3068,22 @@ footer .footer-footer p span:hover {
   }
 }
 
-.container .table-container {
+.container-cart .table-container {
   margin: 0 1rem;
   margin-top: 5rem;
   overflow-x: auto;
 }
-.container .table-container table {
+.container-cart .table-container table {
   border: 1px solid #ebebeb;
 }
-.container .table-container table thead {
+.container-cart .table-container table thead {
   background-color: #f5f5f5fd;
 }
-.container .table-container table thead tr {
+.container-cart .table-container table thead tr {
   display: flex;
   align-items: center;
 }
-.container .table-container table thead tr th {
+.container-cart .table-container table thead tr th {
   border-right: 1px solid #ebebeb;
   width: 150px;
   padding: 1rem 0;
@@ -2937,10 +3091,10 @@ footer .footer-footer p span:hover {
   font-size: 1.1rem;
   font-weight: 500;
 }
-.container .table-container table tbody tr {
+.container-cart .table-container table tbody tr {
   display: flex;
 }
-.container .table-container table tbody tr td {
+.container-cart .table-container table tbody tr td {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2953,10 +3107,10 @@ footer .footer-footer p span:hover {
   font-size: 1.1rem;
   font-weight: 500;
 }
-.container .table-container table tbody tr td img {
+.container-cart .table-container table tbody tr td img {
   width: auto;
 }
-.container .table-container table tbody tr td input {
+.container-cart .table-container table tbody tr td input {
   width: 50px;
   height: 50px;
   border-radius: 0;
@@ -2964,7 +3118,7 @@ footer .footer-footer p span:hover {
   text-align: center;
   border: 1px solid #ebebeb;
 }
-.container .table-container table tbody tr td .plus-minus {
+.container-cart .table-container table tbody tr td .plus-minus {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -2974,55 +3128,55 @@ footer .footer-footer p span:hover {
   height: 50px;
   background-color: #ebebeb;
 }
-.container .table-container table tbody tr td .plus-minus .plus {
+.container-cart .table-container table tbody tr td .plus-minus .plus {
   margin-top: 0.2rem;
   cursor: pointer;
   transition: 0.4s all;
 }
-.container .table-container table tbody tr td .plus-minus .minus {
+.container-cart .table-container table tbody tr td .plus-minus .minus {
   cursor: pointer;
   transition: 0.4s all;
 }
-.container .table-container table tbody tr td .plus-minus .plus:hover {
+.container-cart .table-container table tbody tr td .plus-minus .plus:hover {
   color: #a41a13;
 }
-.container .table-container table tbody tr td .plus-minus .minus:hover {
+.container-cart .table-container table tbody tr td .plus-minus .minus:hover {
   color: #a41a13;
 }
-.container .total-container {
+.container-cart .total-container {
   margin: 0 1rem;
   margin-top: 3rem;
   margin-bottom: 5rem;
 }
-.container .total-container .total-card {
+.container-cart .total-container .total-card {
   border: 1px solid #ebebeb;
 }
-.container .total-container .total-card h1 {
+.container-cart .total-container .total-card h1 {
   background-color: #f5f5f5fd;
   padding: 0.8rem 1.5rem;
   font-size: 1.3rem;
   font-weight: 500;
 }
-.container .total-container .total-card p {
+.container-cart .total-container .total-card p {
   display: flex;
   justify-content: space-between;
   padding: 1rem 1.5rem;
   font-size: 1.1rem;
   border-top: 1px solid #ebebeb;
 }
-.container .total-container .total-card p span {
+.container-cart .total-container .total-card p span {
   font-size: inherit;
 }
-.container .total-container .total-card .free {
+.container-cart .total-container .total-card .free {
   color: forestgreen;
 }
-.container .total-container .total-card p:last-of-type {
+.container-cart .total-container .total-card p:last-of-type {
   border-bottom: 1px solid #ebebeb;
 }
-.container .total-container .total-card p:last-of-type span {
+.container-cart .total-container .total-card p:last-of-type span {
   font-weight: 600;
 }
-.container .total-container .total-card a {
+.container-cart .total-container .total-card a {
   margin: 1rem 0;
   display: block;
   font-size: 1.1rem;
@@ -3036,29 +3190,58 @@ footer .footer-footer p span:hover {
   padding: 0.5rem 2.5rem;
   transition: 0.4s all;
 }
-.container .total-container .total-card a:hover {
+.container-cart .total-container .total-card a:hover {
   background-color: #eec300;
 }
 @media (min-width: 768px) {
-  .container {
+  .container-cart {
     max-width: 1200px;
     margin: 0 auto;
   }
-  .container .table-container table thead tr th {
+  .container-cart .table-container table thead tr th {
     width: 190px;
     padding: 1.5rem 0;
   }
-  .container .table-container table tbody tr td {
+  .container-cart .table-container table tbody tr td {
     width: 190px;
     height: 170px;
   }
-  .container .total-container {
+  .container-cart .total-container {
     width: 500px;
     margin-left: auto;
   }
 }
 @media (min-width: 1024px) {
-  .container .total-container {
+  .container-cart .total-container {
     margin-right: 2.4rem;
   }
+}
+
+.header-login-btn{
+  border: 1px solid white;
+  padding: 0.2rem 2.3rem;
+  transition: 0.3s all;
+}
+.header-login-btn:hover{
+  color: #a41a13 !important;
+  background-color: white;
+}
+
+.loginErr{
+  text-align: center;
+  background-color: #eec300;
+  color: #a41a13;
+  font-size: 1.2rem;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  padding: 0.4rem 0;
+}
+.success{
+    text-align: center;
+    background-color: rgb(37, 194, 37);
+    color: white;
+    font-size: 1.2rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    padding: 0.4rem 0;
 }

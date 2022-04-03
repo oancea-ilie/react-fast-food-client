@@ -5,7 +5,7 @@ import Burger from "../../assets/img/product-burger.jpg";
 const ContainerCart = () => {
     
     return (
-        <div className="container">
+        <div className="container-cart">
 
             <div className="table-container">
                 <table>
