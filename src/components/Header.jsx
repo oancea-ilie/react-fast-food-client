@@ -107,7 +107,8 @@ const Header = () => {
                     </div>
             
                     {
-                        toggle &&             
+                        toggle &&
+                        <Animated animationIn="bounceInDown" animationOut="bounceInUp" isVisible={true}>             
                             <div className="nav-toggle ">
                                 <Link to={"/"} className="active">Home</Link>
                                 <Link to={"/menu"}>Menu</Link>
@@ -115,6 +116,7 @@ const Header = () => {
                                 <Link to={"contact"}>Contact</Link>
                                 <Link to={"/"} className="header-login-btn toggle-login-btn" onClick={handleLogout}>Logout</Link>
                             </div>
+                        </Animated>
                     }
                 </section>
                 :
