@@ -2,11 +2,11 @@ import React from "react";
 
 const HeroCart = () => {
     return(
-        <div class="cart-hero">
+        <div className="cart-hero">
             <h1>Cart</h1>
 
-            <div class="link-cards">
-                <a href="index.html" class="active">Home</a>
+            <div className="link-cards">
+                <a href="index.html" className="active">Home</a>
                 <p>/</p>
                 <a href="#">Cart</a>
             </div>

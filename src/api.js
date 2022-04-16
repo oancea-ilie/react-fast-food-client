@@ -2,9 +2,7 @@ import { Buffer } from "buffer";
 
 export class Api{
 
-    api(path, method = 'GET', body= null, requiresAuth = false, credentials = null){
-
-        let url = path;
+    api(path, method = 'GET', body= null, token = null){
     
         const options={
             method,
@@ -18,19 +16,17 @@ export class Api{
         }
     
         // pentru perimisuni in functie de utilizator
-        if(requiresAuth){
-            const encodedCredentials=
-            Buffer.from(`${credentials.username}:${credentials.password}`).toString('base64');
-            options.headers['Authorization']= `Basic ${encodedCredentials}`;
+        if(token){
+            options.headers['Authorization']= `Bearer ${token}`;
         }
     
-        return fetch( url, options);
+        return fetch( path, options);
     }
 
     // CUSTOMERS
     async login(user){
         try{
-            const rez = await this.api('http://localhost:3005/api/customers/login','POST', user);
+            const rez = await this.api('/api/customers/login','POST', user);
             if(rez.status === 200){
                 return rez.json();
             }else{
@@ -47,7 +43,7 @@ export class Api{
     async getAllCusotmers(user){
         
         try{
-            const rez = await this.api('http://localhost:3005/api/customers', 'GET', null, true, {
+            const rez = await this.api('/api/customers', 'GET', null, true, {
                 username: user.email,
                 password: user.password
             });
@@ -68,7 +64,7 @@ export class Api{
     async getCustomerByID(id){
         
         try{
-            const rez = await this.api(`http://localhost:3005/api/customers/${id}`);
+            const rez = await this.api(`/api/customers/${id}`);
 
             if(rez.status === 200){
                 return rez.json();
@@ -86,7 +82,7 @@ export class Api{
     async createCustomer(newObj){
         
         try{
-            const rez = await this.api(`http://localhost:3005/api/customers`, 'POST', newObj);
+            const rez = await this.api(`/api/customers`, 'POST', newObj);
 
             if(rez.status === 204){
                 return "create success";
@@ -104,7 +100,7 @@ export class Api{
     async updateCustomer(newObj,id){
         
         try{
-            const rez = await this.api(`http://localhost:3005/api/customers/${id}`, 'PUT', newObj);
+            const rez = await this.api(`/api/customers/${id}`, 'PUT', newObj);
 
             if(rez.status === 204){
                 return "update success";
@@ -122,7 +118,7 @@ export class Api{
     async deleteCustomer(id){
         
         try{
-            const rez = await this.api(`http://localhost:3005/api/customers/${id}`, 'DELETE');
+            const rez = await this.api(`/api/customers/${id}`, 'DELETE');
 
             if(rez.status === 204){
                 return "delete success";
@@ -139,11 +135,10 @@ export class Api{
     
     // PRODUCTS
 
-    async getAllProducts(){
+    async getAllProducts(token){
         
         try{
-            const rez = await this.api('http://localhost:3005/api/products');
-
+            const rez = await this.api('/api/products');
             if(rez.status === 200){
                 return rez.json();
             }else{
@@ -160,7 +155,7 @@ export class Api{
     async getProductByID(id){
         
         try{
-            const rez = await this.api(`http://localhost:3005/api/products/${id}`);
+            const rez = await this.api(`/api/products/${id}`);
 
             if(rez.status === 200){
                 return rez.json();
@@ -178,7 +173,7 @@ export class Api{
     async createProduct(newObj){
         
         try{
-            const rez = await this.api(`http://localhost:3005/api/products`, 'POST', newObj);
+            const rez = await this.api(`/api/products`, 'POST', newObj);
 
             if(rez.status === 204){
                 return "create success";
@@ -196,7 +191,7 @@ export class Api{
     async updateProduct(newObj,id){
         
         try{
-            const rez = await this.api(`http://localhost:3005/api/products/${id}`, 'PUT', newObj);
+            const rez = await this.api(`/api/products/${id}`, 'PUT', newObj);
 
             if(rez.status === 204){
                 return "update success";
@@ -214,7 +209,7 @@ export class Api{
     async deleteProduct(id){
         
         try{
-            const rez = await this.api(`http://localhost:3005/api/products/${id}`, 'DELETE');
+            const rez = await this.api(`/api/products/${id}`, 'DELETE');
 
             if(rez.status === 204){
                 return "delete success";
@@ -234,7 +229,7 @@ export class Api{
     async getAllCategories(){
         
         try{
-            const rez = await this.api('http://localhost:3005/api/categories');
+            const rez = await this.api('/api/categories');
 
             if(rez.status === 200){
                 return rez.json();
@@ -252,7 +247,7 @@ export class Api{
     async getCategoryByID(id){
         
         try{
-            const rez = await this.api(`http://localhost:3005/api/categories/${id}`);
+            const rez = await this.api(`/api/categories/${id}`);
 
             if(rez.status === 200){
                 return rez.json();
@@ -270,7 +265,7 @@ export class Api{
     async createCategory(newObj){
         
         try{
-            const rez = await this.api(`http://localhost:3005/api/categories`, 'POST', newObj);
+            const rez = await this.api(`/api/categories`, 'POST', newObj);
 
             if(rez.status === 204){
                 return "create success";
@@ -288,7 +283,7 @@ export class Api{
     async updateCategory(newObj,id){
         
         try{
-            const rez = await this.api(`http://localhost:3005/api/categories/${id}`, 'PUT', newObj);
+            const rez = await this.api(`/api/categories/${id}`, 'PUT', newObj);
 
             if(rez.status === 204){
                 return "update success";
@@ -306,7 +301,7 @@ export class Api{
     async deleteCategory(id){
         
         try{
-            const rez = await this.api(`http://localhost:3005/api/categories/${id}`, 'DELETE');
+            const rez = await this.api(`/api/categories/${id}`, 'DELETE');
 
             if(rez.status === 204){
                 return "delete success";
@@ -326,7 +321,7 @@ export class Api{
     async getAllOrders(){
         
         try{
-            const rez = await this.api('http://localhost:3005/api/orders');
+            const rez = await this.api('/api/orders');
 
             if(rez.status === 200){
                 return rez.json();
@@ -344,7 +339,7 @@ export class Api{
     async getOrderByID(id){
         
         try{
-            const rez = await this.api(`http://localhost:3005/api/orders/${id}`);
+            const rez = await this.api(`/api/orders/${id}`);
 
             if(rez.status === 200){
                 return rez.json();
@@ -362,7 +357,7 @@ export class Api{
     async createOrder(newObj){
         
         try{
-            const rez = await this.api(`http://localhost:3005/api/orders`, 'POST', newObj);
+            const rez = await this.api(`/api/orders`, 'POST', newObj);
 
             if(rez.status === 204){
                 return "create success";
@@ -380,7 +375,7 @@ export class Api{
     async updateOrder(newObj,id){
         
         try{
-            const rez = await this.api(`http://localhost:3005/api/orders/${id}`, 'PUT', newObj);
+            const rez = await this.api(`/api/orders/${id}`, 'PUT', newObj);
 
             if(rez.status === 204){
                 return "update success";
@@ -398,7 +393,7 @@ export class Api{
     async deleteOrder(id){
         
         try{
-            const rez = await this.api(`http://localhost:3005/api/orders/${id}`, 'DELETE');
+            const rez = await this.api(`/api/orders/${id}`, 'DELETE');
 
             if(rez.status === 204){
                 return "delete success";
@@ -412,7 +407,229 @@ export class Api{
         }
         
     }
+
+    // Product Categories
+
+    async getAllProductCategories(){
     
+        try{
+            const rez = await this.api('/api/product-categories');
+
+            if(rez.status === 200){
+                return rez.json();
+            }else{
+                let data = await rez.json();
+                return data.error.message;
+            }
+
+        }catch(e){
+            throw new Error(e);
+        }
+        
+    }
+
+    async getProductCategoriesByID(id){
+        
+        try{
+            const rez = await this.api(`/api/product-categories/${id}`);
+
+            if(rez.status === 200){
+                return rez.json();
+            }else{
+                let data = await rez.json();
+                return data.error.message;
+            }
+
+        }catch(e){
+            throw new Error(e);
+        }
+        
+    }
+
+    async createProductCategory(newObj){
+        
+        try{
+            const rez = await this.api(`/api/product-categories`, 'POST', newObj);
+
+            if(rez.status === 204){
+                return "create success";
+            }else{
+                let data = await rez.json();
+                return data.error.message;
+            }
+
+        }catch(e){
+            throw new Error(e);
+        }
+        
+    }
+    
+    async updateProductCategory(newObj,id){
+        
+        try{
+            const rez = await this.api(`/api/product-categories/${id}`, 'PUT', newObj);
+
+            if(rez.status === 204){
+                return "update success";
+            }else{
+                let data = await rez.json();
+                return data.error.message;
+            }
+
+        }catch(e){
+            throw new Error(e);
+        }
+        
+    }
+    
+    async deleteProductCategory(id){
+        
+        try{
+            const rez = await this.api(`/api/product-categories/${id}`, 'DELETE');
+
+            if(rez.status === 204){
+                return "delete success";
+            }else{
+                let data = await rez.json();
+                return data.error.message;
+            }
+
+        }catch(e){
+            throw new Error(e);
+        }
+        
+    }
+
+    // Order Details
+
+    async getAllOrderDetailsFiltred(id){
+    
+        try{
+            const rez = await this.api(`/api/product-categories/join-all/${id}`);
+
+            if(rez.status === 200){
+                return rez.json();
+            }else{
+                let data = await rez.json();
+                return data.error.message;
+            }
+
+        }catch(e){
+            throw new Error(e);
+        }
+        
+    }
+
+    async getAllOrderDetails(){
+    
+        try{
+            const rez = await this.api('/api/orders-details');
+
+            if(rez.status === 200){
+                return rez.json();
+            }else{
+                let data = await rez.json();
+                return data.error.message;
+            }
+
+        }catch(e){
+            throw new Error(e);
+        }
+        
+    }
+
+    async getOrderDetailByID(id){
+        
+        try{
+            const rez = await this.api(`/api/orders-details/${id}`);
+
+            if(rez.status === 200){
+                return rez.json();
+            }else{
+                let data = await rez.json();
+                return data.error.message;
+            }
+
+        }catch(e){
+            throw new Error(e);
+        }
+        
+    }
+
+    async createOrderDetail(newObj){
+        
+        try{
+            const rez = await this.api(`/api/orders-details`, 'POST', newObj);
+
+            if(rez.status === 204){
+                return "create success";
+            }else{
+                let data = await rez.json();
+                return data.error.message;
+            }
+
+        }catch(e){
+            throw new Error(e);
+        }
+        
+    }
+    
+    async updateOrderDetail(newObj,id){
+        
+        try{
+            const rez = await this.api(`/api/orders-details/${id}`, 'PUT', newObj);
+
+            if(rez.status === 204){
+                return "update success";
+            }else{
+                let data = await rez.json();
+                return data.error.message;
+            }
+
+        }catch(e){
+            throw new Error(e);
+        }
+        
+    }
+    
+    async deleteOrderDetail(id){
+        
+        try{
+            const rez = await this.api(`/api/orders-details/${id}`, 'DELETE');
+
+            if(rez.status === 204){
+                return "delete success";
+            }else{
+                let data = await rez.json();
+                return data.error.message;
+            }
+
+        }catch(e){
+            throw new Error(e);
+        }
+        
+    }
+
+
+    
+
+    async getAllImages(){
+        
+        try{
+            const rez = await this.api('/api/images');
+
+            if(rez.status === 200){
+                return rez.json();
+            }else{
+                let data = await rez.json();
+                return data.error.message;
+            }
+
+        }catch(e){
+            throw new Error(e);
+        }
+        
+    }
 }
 
 export default Api;

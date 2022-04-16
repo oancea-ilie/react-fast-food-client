@@ -8,6 +8,7 @@ import Produse from "./Produse";
 import Services from "./Services";
 
 const MainHome = () => {
+
     return (
         <main className="main-home">
             <HeroMain/>

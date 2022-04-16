@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import Api from "../../api";
 import { Context } from "../Context";
+import Cookies from "js-cookie";
 
 const Login = () => {
 
@@ -33,13 +34,13 @@ const Login = () => {
     let check=()=>{
         setErr([]);
 
-       if(email === ""){
+       if(email == ""){
             setErr((prev=>{
                return [...prev,"Email is required" ];
           }));
        }
 
-       if(pass === ""){
+       if(pass == ""){
             setErr((prev=>{
                return [...prev, "Password is required"];
            }));
@@ -49,26 +50,26 @@ const Login = () => {
 
     let loginHandle = async()=>{
         check();
-        
+
         if(err == ''){
             let obj = {email: email, password: pass};
 
             let rez = await api.login(obj);
 
-            if(rez === "success"){
-                setUser(obj);
-                history.push("/");
+            if(typeof rez =="object"){
                 
+                setUser(rez);
+                Cookies.set("authentificatedUser", JSON.stringify(rez));
+                history.push("/");
             }else{
                 setErr((prev=>{
                     return [...prev, rez ];
-               }));
+                }));
             }
 
-
         }
-        
     }
+
 
     useEffect(()=>{
         check();

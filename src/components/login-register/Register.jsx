@@ -145,7 +145,7 @@ const Register = () => {
                 <div className="form" onChange={onChange}>
                     {
                         err && err.map(e=>{
-                            if(e == 'create success'){
+                            if(e === 'create success'){
                                 return <p key={e} className="success">{e}</p>
                             }
                             return <p key={e} className="loginErr">{e}</p>

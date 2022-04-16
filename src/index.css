@@ -1207,8 +1207,12 @@ footer .footer-footer p span:hover {
   border-radius: 5px;
   background-color: white;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .products .body .card img {
+  margin-top: 0.5rem;
   border-radius: 5px;
 }
 .products .body .card h1 {
@@ -2466,6 +2470,9 @@ footer .footer-footer p span:hover {
   border-radius: 5px;
   background-color: white;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .menu-products .body .card img {
   border-radius: 5px;
@@ -2496,6 +2503,7 @@ footer .footer-footer p span:hover {
   margin-top: 1rem;
   transition: 0.4s all;
   font-weight: bold;
+
 }
 .menu-products .body .card a:hover {
   background-color: #eec300;

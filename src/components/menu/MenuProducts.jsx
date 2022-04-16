@@ -1,12 +1,84 @@
-import React from "react";
-import Product1 from "../../assets/img/product-burger.jpg"
-import Product2 from "../../assets/img/product-pizz.jpg"
-import Product3 from "../../assets/img/product-cartofi.jpg"
-import Product4 from "../../assets/img/product-coca-cola.jpg"
-import Product5 from "../../assets/img/product-burger.jpg"
+import React, {useEffect, useState } from "react";
+import Api from "../../api";
+import arrayBufferToBase64 from "../../utils";
 
 const MenuProducts = () => {
     
+    let [products, setProducts] = useState([]);
+    
+    let [limit, setLimit] = useState(5);
+
+    let api = new Api();
+
+    let populateProducts = async()=>{
+        let rez = await api.getAllProducts();
+
+        if(typeof rez != 'string'){
+            setProducts(rez);
+        }else{
+            console.log(rez);
+        }
+    }
+
+    let handleLimitProducts=(e)=>{
+        e.preventDefault();
+        if(products.length > 5){
+            setLimit(prev =>{
+                return prev + 5;
+            });
+        }
+    }
+        
+    let handleOrderBtn = (product)=>{
+
+        let arr = [];
+
+        let arrLocal = localStorage.getItem('Products');
+
+        if(arrLocal){
+            arrLocal = JSON.parse(arrLocal);
+
+            arrLocal.forEach(e=>{
+                arr.push(e);
+            })
+        }
+
+        arr.push(product);
+
+        localStorage.setItem("Products", JSON.stringify(arr));
+
+    }
+    
+    let handleFilter = async(e)=>{
+        e.preventDefault();
+        let obj = e.target;
+
+        if(obj.id){
+            // setare active pe element
+            let parent = obj.parentNode;
+            let links = parent.childNodes;
+            links.forEach(e=>{
+                if(e.classList.contains("active")){
+                    e.classList.remove("active");
+                }
+            })
+            obj.classList.add("active");
+            
+            if(obj.id !== "All"){
+                let rez = await api.getAllOrderDetailsFiltred(obj.id);
+                setProducts(rez);
+            }
+            if(obj.id === "All"){
+                populateProducts();
+            }
+
+        }
+    }
+
+    useEffect(()=>{
+        populateProducts();
+    },[limit]);
+
     return (
         <section className="menu-products">
 
@@ -16,56 +88,51 @@ const MenuProducts = () => {
                     <div className="line"></div>
                 </div>
                 
-                <div className="lists">
-                    <a href="#" className="active">All</a>
-                    <a href="#">Pizza</a>
-                    <a href="#">Burgers</a>
-                    <a href="#">Wraps</a>
-                    <a href="#">Fries</a>
-                    <a href="#">Salad</a>
-                    <a href="#">Drinks</a>
+                <div className="lists" onClick={handleFilter}>
+                    <a href="#" id="All" className="active">All</a>
+                    <a href="#" id="Pizza">Pizza</a>
+                    <a href="#" id="Burgers">Burgers</a>
+                    <a href="#" id="Fries">Fries</a>
+                    <a href="#" id="Combo">Combo</a>
+                    <a href="#" id="Drinks">Drinks</a>
                 </div>
             </div>
 
             <div className="body">
-                <div className="card">
-                    <img src={Product1} alt=""/>
-                    <h1>Chicken Burger</h1>
-                    <p>Our flavors & ingredients to build our local burgers</p>
-                    <h2>$17.00</h2>
-                    <a href="#">ORDER NOW</a>
-                </div>
-                <div className="card">
-                    <img src={Product2} alt=""/>
-                    <h1>classNameic Smash</h1>
-                    <p>Our flavors & ingredients to build our local burgers</p>
-                    <h2>$17.00</h2>
-                    <a href="#">ORDER NOW</a>
-                </div>
-                <div className="card">
-                    <img src={Product3} alt=""/>
-                    <h1>classNameic Smash</h1>
-                    <p>Our flavors & ingredients to build our local burgers</p>
-                    <h2>$17.00</h2>
-                    <a href="#">ORDER NOW</a>
-                </div>
-                <div className="card">
-                    <img src={Product4} alt=""/>
-                    <h1>Soft Drink</h1>
-                    <p>Our flavors & ingredients to build our local burgers</p>
-                    <h2>$17.00</h2>
-                    <a href="#">ORDER NOW</a>
-                </div>
-                <div className="card">
-                    <img src={Product5} alt=""/>
-                    <h1>Chicken Burger</h1>
-                    <p>Our flavors & ingredients to build our local burgers</p>
-                    <h2>$17.00</h2>
-                    <a href="#">ORDER NOW</a>
-                </div>
+                {
+                    products && 
+                    products.slice(0, limit).map(e=>{
+                        if(e.fk_category_id){
+                            return (
+                                <div key={e.id} className="card">
+                                   <div className="product-card-img">
+                                   <img src={"data:image/png;base64," + arrayBufferToBase64(e.fk_product_id_product_category.image.data)} alt=""/>
+                                   </div>
+                                   <h1>{e.fk_product_id_product_category.name}</h1>
+                                   <p>{e.fk_product_id_product_category.description}</p>
+                                   <h2>${e.fk_product_id_product_category.price}</h2>
+                                   <a href="#" onClick={(event)=>{handleOrderBtn(e)}}>ORDER NOW</a>
+                               </div>
+                           )
+                        }else{
+                            return <div key={e.id} className="card">
+                            <div className="product-card-img">
+                                <img src={"data:image/png;base64," + arrayBufferToBase64(e.image.data) } alt=""/>
+                            </div>
+                            <h1>{e.name}</h1>
+                            <p>{e.description}</p>
+                            <h2>${e.price}</h2>
+                            <a href="#" onClick={(event)=>{event.preventDefault(); handleOrderBtn(e)}}>ORDER NOW</a>
+                        </div>
+                        }
+                    })
+                }
             </div>
 
-            <a href="#" className="view-more">VIEW MORE</a>
+            {
+                limit < products.length 
+                && <a href="#" className="view-more" onClick={handleLimitProducts}>VIEW MORE</a>
+            }
         </section>
     )
 }

@@ -11,6 +11,7 @@ import Register from "./components/login-register/Register";
 import Login from "./components/login-register/Login";
 import MainCart from "./components/cart/MainCart";
 import UserProvider from "./components/Context";
+import { GlobalSyle } from "./GlobalStyle";
 
 const App = () => {
   
@@ -19,7 +20,7 @@ const App = () => {
       <UserProvider>
         <Header/>
         <Switch>
-          <Route exact path={"/"}><MainHome /></Route>
+          <Route exact path={"/"}><MainHome/></Route>
           <Route exact path={"/menu"}><MainMenu /></Route>
           <Route exact path={"/about-us"}><MainAbout /></Route>
           <Route exact path={"/contact"}><MainContact /></Route>
@@ -29,6 +30,7 @@ const App = () => {
         </Switch>
         <Footer/>
     </UserProvider>
+    <GlobalSyle/>
   </Router>
   )
 
