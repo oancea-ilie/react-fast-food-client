@@ -1,18 +1,20 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react'
+import { Link } from 'react-router-dom'
 
-const HeroCart = () => {
+
+const UserDetails = () => {
+
     return(
         <div className="cart-hero">
-            <h1>Cart</h1>
+            <h1>User Details</h1>
 
             <div className="link-cards">
                 <Link to={"/"} className="active">Home</Link>
                 <p>/</p>
-                <a href="#">Cart</a>
+                <a href="#">User Details</a>
             </div>
         </div>
     )
 }
 
-export default HeroCart
+export default UserDetails

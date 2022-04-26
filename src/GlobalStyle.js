@@ -1137,7 +1137,7 @@ footer .footer-footer p span:hover {
   color: #e93030;
   font-weight: 900;
 }
-.products .body .card a {
+.products .body .card button {
   background-color: #a41a13;
   width: 90%;
   margin: 0 auto;
@@ -1148,7 +1148,7 @@ footer .footer-footer p span:hover {
   transition: 0.4s all;
   font-weight: bold;
 }
-.products .body .card a:hover {
+.products .body .card button:hover {
   background-color: #eec300;
 }
 @media (min-width: 600px) {
@@ -2792,8 +2792,12 @@ footer .footer-footer p span:hover {
 .header-login .container nav {
   display: none;
 }
-.header-login .container nav .active {
-  color: #eec300;
+.active-link {
+  color: #eec300 !important;
+}
+.active-btn{
+  background-color: white !important;
+  color: #a41a13 !important;
 }
 .red{
   background-color: black !important;
@@ -3026,7 +3030,7 @@ footer .footer-footer p span:hover {
   font-weight: 500;
 }
 .container-cart .table-container table tbody tr td img {
-  width: auto;
+  width: 100px;
 }
 .container-cart .table-container table tbody tr td input {
   width: 50px;
@@ -3128,6 +3132,9 @@ footer .footer-footer p span:hover {
     width: 500px;
     margin-left: auto;
   }
+  .header-login-btn{
+    margin-top: 0rem !important;
+  }
 }
 @media (min-width: 1024px) {
   .container-cart .total-container {
@@ -3136,14 +3143,18 @@ footer .footer-footer p span:hover {
 }
 
 .header-login-btn{
+  margin-top: 0.5rem;
   border: 1px solid white;
   padding: 0.2rem 2.3rem;
   transition: 0.3s all;
+  background-color: transparent;
+  color: white;
 }
 .header-login-btn:hover{
   color: #a41a13 !important;
-  background-color: white;
+  background-color: white !important;
 }
+
 
 .loginErr{
   text-align: center;
@@ -3175,5 +3186,24 @@ footer .footer-footer p span:hover {
   font-size: 1.6rem;
 }
 
+.product-btn{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.product-btn2{
+  background-color: #eec300 !important;
+  cursor: unset;
+}
+
+.loading{
+  padding: 4rem 0;
+  display: block;
+  margin: 0 auto;
+  width: 300px;
+  position: relative;
+}
 
 `

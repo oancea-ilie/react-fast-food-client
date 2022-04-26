@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
+import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 import Api from "../../api";
@@ -23,6 +24,8 @@ const Register = () => {
     let [phone, setPhone] = useState('');
 
     let [err, setErr] = useState([]);
+
+    let history = useHistory();
 
     let onChange=(e)=>{
         let obj= e.target;
@@ -126,6 +129,7 @@ const Register = () => {
 
             if(add == 'success'){
                 setUser({email: email, password: password});
+                history.push("/");
             }else{
                 setErr((prev=>{
                     return [...prev, add ];

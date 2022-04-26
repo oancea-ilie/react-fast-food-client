@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from "react";
-import Cartofi from "../../assets/img/product-cartofi.jpg"
-import {GrClose} from "react-icons/gr"
-import Api from "../../api";
-const ContainerCart = () => {
-    
+import Loading from "../../assets/loading.svg"
+import CartProduct from "./CartProduct";
 
-    let [products, setProducts] = useState('');
+const ContainerCart = ({populateLocal}) => {
 
-    let [quantity, setQuantity] = useState(1);
+    let [products, setProducts] = useState([]);
 
-    let api = new Api();
+    let [subTotal, setSubTotal] = useState(0);
 
-    let populateProducts = async()=>{
+    let [productsCopy, setProductsCopy]= useState([]);
+
+    let populateProducts =()=>{
 
         let rez = localStorage.getItem("Products");
 
@@ -22,79 +21,103 @@ const ContainerCart = () => {
 
     }
 
-    let handleCloseBtn = (el)=>{
+    let populateProductsCopy =()=>{
         let rez = localStorage.getItem("Products");
 
         if(rez){
             rez = JSON.parse(rez);
+            setProductsCopy(rez);
+        }
 
-            let filtrat = rez.filter(e=> e.id != el.id);
+    }
 
-            localStorage.setItem("Products", JSON.stringify(filtrat));
+    let handleProductCopy = (id, newPrice)=>{
 
-            setProducts(prev=>{
-                let total = [...prev];
+        if(productsCopy){
+            let arr = productsCopy;
+            let obj;
+            arr.forEach(e=>{
+                if(e.id == id){
+                    obj = e;
+                }
+            });
 
-                let filt = total.filter(e=>e.id != el.id);
-                
-                return filt;
+            if(obj){
+                obj.price = newPrice;
+                arr = arr.filter(el => el.id != id);
+                arr.push(obj);
+
+                setProductsCopy(arr);
+            }
+
+        }
+    }
+
+    let handlSubTotal=()=>{
+
+        let aux = 0;
+        if(productsCopy){
+            productsCopy.forEach(e=>{
+                aux += parseInt(e.price);
             })
         }
+
+        setSubTotal(aux);
     }
 
     useEffect(e=>{
         populateProducts();
+        populateProductsCopy();
     },[])
+
+
+    useEffect(e=>{
+        handlSubTotal();
+    },[productsCopy])
+
 
 
     return (
         <div className="container-cart">
             {
-                products?
-                <>
-                <div className="table-container">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Preview</th>
-                                <th>Product</th>
-                                <th>Price</th>
-                                <th>Quantity</th>
-                                <th>Total</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                products.map(e=>{
-                                    return (
-                                        <tr key={e.id}>
-                                            <td><img src={Cartofi} alt=""/></td>
-                                            <td>{e.name}</td>
-                                            <td>{e.price}</td>
-                                            <td><input type="text" placeholder={quantity} disabled/><div className="plus-minus"><div className="plus">+</div> <div className="minus">-</div></div></td>
-                                            <td>$25</td>
-                                            <td><GrClose className="cart-close-btn" onClick={()=>handleCloseBtn(e)}/></td>
-                                        </tr>
-                                    )
-                                })
-                            }
-                        </tbody>
-                    </table>           
-                </div>
+                products.length>0?
+                <div className="wrapper">
+                        <div className="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Preview</th>
+                                    <th>Product</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Total</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    products.map(e=>{
+                                        return (
+                                            <CartProduct key={e.id} handleProductCopy={handleProductCopy} product={e} populateLocal={populateLocal} populateProducts = {populateProducts} setProductsCopy={setProductsCopy}
+                                            productsCopy = {productsCopy}/>
+                                        )
+                                    })
+                                }
+                            </tbody>
+                        </table>           
+                    </div>
 
-                <div className="total-container">
-                    <div className="total-card">
-                        <h1>Cart Totals</h1>
-                        <p>Sub total <span>$25</span></p>
-                        <p>Shipping <span className="free">Free</span></p>
-                        <p>Total <span>$25</span></p>
-                        <a href="#">Place Order</a>
+                    <div className="total-container">
+                        <div className="total-card">
+                            <h1>Cart Totals</h1>
+                            <p>Sub total <span>${subTotal}</span></p>
+                            <p>Shipping <span className="free">Free</span></p>
+                            <p>Total <span>${subTotal}</span></p>
+                            <a href="#">Place Order</a>
+                        </div>
                     </div>
                 </div>
-                </>
-                //SETARE EROARE
-                :<p>EROARE</p>
+                :<img className="loading" src={Loading} alt="" />
             }
         </div>
     )

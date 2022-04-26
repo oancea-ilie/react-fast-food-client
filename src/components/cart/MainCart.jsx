@@ -4,7 +4,7 @@ import { Context } from "../Context";
 import ContainerCart from "./ContainerCart";
 import HeroCart from "./HeroCart";
 
-const MainCart = () => {
+const MainCart = ({populateLocal}) => {
 
     let [user, setUser] = useContext(Context);
 
@@ -13,14 +13,11 @@ const MainCart = () => {
     return(
         <>
         {
-            user
-            ?
+            user &&
             <main className="main-cart">
                 <HeroCart/>
-                <ContainerCart/>
+                <ContainerCart populateLocal={populateLocal}/>
             </main>
-            : 
-            history.push("/")
         }
         </>
     )

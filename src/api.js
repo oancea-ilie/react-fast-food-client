@@ -84,8 +84,8 @@ export class Api{
         try{
             const rez = await this.api(`/api/customers`, 'POST', newObj);
 
-            if(rez.status === 204){
-                return "create success";
+            if(rez.status === 201){
+                return "success";
             }else{
                 let data = await rez.json();
                 return data.error.message;

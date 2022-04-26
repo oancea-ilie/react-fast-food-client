@@ -1,15 +1,20 @@
-import React, {useContext, useEffect, useState } from "react";
+import React, {useContext, useEffect, useRef, useState } from "react";
 import Api from "../../api";
 import { Context } from "../Context";
 import arrayBufferToBase64 from "../../utils";
+import { useHistory } from "react-router-dom";
 
-const Produse = () => {
+const Produse = ({populateLocal}) => {
 
     let [products, setProducts] = useState([]);
 
     let [user, setUser] = useContext(Context);
 
+    let [local, setLocal] = useState([]);
+
     let api = new Api();
+
+    let history = useHistory();
 
     let populateProducts = async()=>{
         
@@ -20,6 +25,16 @@ const Produse = () => {
 
         }else{
             console.log(rez);
+        }
+    }
+
+    let populateLocalStorage=()=>{
+
+        let arrLocal = localStorage.getItem('Products');
+        arrLocal = JSON.parse(arrLocal);
+
+        if(arrLocal){
+           setLocal(arrLocal);
         }
     }
 
@@ -50,29 +65,58 @@ const Produse = () => {
             }
         }
     }
+
+    let handleOrderBtn = (product,event)=>{
+        event.preventDefault();
+
+        if(user == null || user == undefined){
+            history.push("/login");
+        }else{
+
+            let obj = event.target;
+            obj.disabled = true;
+            obj.style.backgroundColor = "#eec300";
+            obj.style.cursor = 'unset';
+            obj.textContent = 'ORDERED';
     
-    let handleOrderBtn = (product)=>{
-
-        let arr = [];
-
-        let arrLocal = localStorage.getItem('Products');
-
-        if(arrLocal){
+            let ok = 0;
+            let arrLocal = localStorage.getItem('Products');
             arrLocal = JSON.parse(arrLocal);
+    
+            if(arrLocal){
+                arrLocal.forEach(e=>{
+                    if(e.id == product.id){
+                        ok = 1;
+                    }
+                })
+            }
+    
+            if(ok == 0){
+                arrLocal.push(product);
+                arrLocal = JSON.stringify(arrLocal);
+                localStorage.setItem('Products', arrLocal);
+                populateLocal();
+            }
 
-            arrLocal.forEach(e=>{
-                arr.push(e);
-            })
         }
 
-        arr.push(product);
+    }
 
-        localStorage.setItem("Products", JSON.stringify(arr));
+    let verifyCart = (product)=>{
+        if(local){
+            for(let p of local){
+                if(p.id == product.id){
 
+                    return true;
+                }
+            }
+        }
+        
     }
 
     useEffect(()=>{
         populateProducts();
+        populateLocalStorage();
     },[]);
 
     return (
@@ -90,14 +134,14 @@ const Produse = () => {
                     <a href="#" id="Burgers">Burgers</a>
                     <a href="#" id="Fries">Fries</a>
                     <a href="#" id="Combo">Combo</a>
-                    <a href="#" id="Drinks">Drinks</a>
+                    <a  href="#" id="Drinks">Drinks</a>
                 </div>
             </div>
 
             <div className="body">
                 {
                     products &&
-                        products.map(e=>{
+                        products.map((e)=>{
                             if(e.fk_category_id){
                                 return (
                                      <div key={e.id} className="card">
@@ -107,10 +151,14 @@ const Produse = () => {
                                         <h1>{e.fk_product_id_product_category.name}</h1>
                                         <p>{e.fk_product_id_product_category.description}</p>
                                         <h2>${e.fk_product_id_product_category.price}</h2>
-                                        <a href="#" onClick={(event)=>{handleOrderBtn(e)}}>ORDER NOW</a>
+                                        <button href="#" onClick={(event)=>{handleOrderBtn(e)}}>
+                                            ORDER NOW
+                                        </button>
                                     </div>
                                 )
                             }else{
+
+                                let v = verifyCart(e);
                                 return <div key={e.id} className="card">
                                     <div className="product-card-img">
                                         <img src={"data:image/png;base64," + arrayBufferToBase64(e.image.data) } alt=""/>
@@ -118,7 +166,10 @@ const Produse = () => {
                                     <h1>{e.name}</h1>
                                     <p>{e.description}</p>
                                     <h2>${e.price}</h2>
-                                    <a href="#" onClick={(event)=>{event.preventDefault(); handleOrderBtn(e)}}>ORDER NOW</a>
+                                    {
+                                        v?<button href="#"  className="product-btn2" disabled>ORDERED</button>
+                                        :<button href="#"  className="product-btn"onClick={(event)=>{handleOrderBtn(e,event)}}>ORDER NOW</button>
+                                    }   
                                 </div>
                             }
                         })

@@ -5,51 +5,19 @@ import Logo1 from "../assets/img/logo-1024.png"
 import {FiMenu} from "react-icons/fi"
 import {GrClose} from "react-icons/gr"
 import { Context } from "./Context";
-import UserDetails from "./UserDetails";
+import HeaderRight from "./HeaderRight";
 import Cookies from "js-cookie";
 import { useHistory } from "react-router-dom";
 import {Animated} from "react-animated-css";
+import { NavLink } from "react-router-dom";
 
-
-const Header = () => {
+const Header = ({local}) => {
 
     const [user, setUser] = useContext(Context);
 
     let [toggle, setToggle] = useState(true);
 
     let history = useHistory();
-
-    let handleActive=(e)=>{
-        let obj = e.target;
-
-        // de revenit aici
-        if( obj.classList.contains("home-link")
-            || obj.classList.contains("menu-link")
-            || obj.classList.contains("about-link")
-            || obj.classList.contains("contact-link")){
-                let parent = obj.parentNode;
-                let children = parent.children;
-
-                for(let el of children){
-                    if(el.classList.contains("active")){
-                        el.classList.remove("active");
-                    }
-                }
-                obj.classList.add("active");
-                
-                children[4].style.backgroundColor = "transparent";
-                children[4].style.color = "white";
-            }
-        if(obj.classList.contains("header-login-btn")){
-            obj.style.backgroundColor = "white";
-            obj.style.color = "#a41a13";
-            let parent = obj.parentNode;
-            let children = parent.children;
-            for(let el of children){
-                el.classList.remove("active");
-            }
-        }
-    }
 
     let corectie = ()=>{
         let img = document.querySelector(".logo");
@@ -95,12 +63,12 @@ const Header = () => {
                             <>
                                 <FiMenu className="fas fa-bars" onClick={()=>{setToggle(true)}}/> 
                             <nav>
-                                <Link to={"/"} className="active">Home</Link>
-                                <Link to={"/menu"}>Menu</Link>
-                                <Link to={"/about-us"}>About Us</Link>
-                                <Link to={"/contact"}>Contact</Link>
-                                <Link to={"/"} className="header-login-btn" onClick={handleLogout}>Logout</Link>
-                                <UserDetails/>
+                                <NavLink to={"/"} exact={true} activeClassName="active-link">Home</NavLink>
+                                <NavLink to={"/menu"} activeClassName="active-link">Menu</NavLink>
+                                <NavLink to={"/about-us"} activeClassName="active-link">About Us</NavLink>
+                                <NavLink to={"/contact"} activeClassName="active-link">Contact</NavLink>
+                                <NavLink to={"/"} className="header-login-btn" onClick={handleLogout}>Logout</NavLink>
+                                <HeaderRight local = {local}/>
                             </nav>
                             </>
                         }
@@ -110,11 +78,11 @@ const Header = () => {
                         toggle &&
                         <Animated animationIn="bounceInDown" animationOut="bounceInUp" isVisible={true}>             
                             <div className="nav-toggle ">
-                                <Link to={"/"} className="active">Home</Link>
-                                <Link to={"/menu"}>Menu</Link>
-                                <Link to={"/about-us"}>About Us</Link>
-                                <Link to={"contact"}>Contact</Link>
-                                <Link to={"/"} className="header-login-btn toggle-login-btn" onClick={handleLogout}>Logout</Link>
+                                <NavLink to={"/"} exact={true} activeClassName="active-link">Home</NavLink>
+                                <NavLink to={"/menu"} activeClassName="active-link">Menu</NavLink>
+                                <NavLink to={"/about-us"} activeClassName="active-link">About Us</NavLink>
+                                <NavLink to={"contact"} activeClassName="active-link">Contact</NavLink>
+                                <NavLink to={"/"} activeClassName="active-btn" className="header-login-btn toggle-login-btn" onClick={handleLogout}>Logout</NavLink>
                             </div>
                         </Animated>
                     }
@@ -131,18 +99,18 @@ const Header = () => {
                                 <GrClose className="fas fa-bars" onClick={()=>{setToggle(false)}}/>
                             : 
                             <>
-                            <FiMenu className="fas fa-bars" onClick={()=>{setToggle(true)}}/> 
-                            <nav onClick={handleActive}>
-                                <Link to={"/"} className="home-link active">Home</Link>
-                                <Link to={"/menu"} className="menu-link">Menu</Link>
-                                <Link to={"/about-us"} className="about-link">About Us</Link>
-                                <Link to={"/contact"} className = "contact-link">Contact</Link>
-                                <Link to={"/login"} className="header-login-btn">Login</Link>
-                                <div className="order-now">
-                                    <h1>Order now</h1>
-                                    <a href="#">1800 456 7890</a>
-                                </div>
-                            </nav>
+                                <FiMenu className="fas fa-bars" onClick={()=>{setToggle(true)}}/> 
+                                <nav>
+                                    <NavLink to={"/"} exact={true} activeClassName="active-link">Home</NavLink>
+                                    <NavLink to={"/menu"} activeClassName="active-link" className="menu-link">Menu</NavLink>
+                                    <NavLink to={"/about-us"} activeClassName="active-link" className="about-link">About Us</NavLink>
+                                    <NavLink to={"/contact"} activeClassName="active-link" className = "contact-link">Contact</NavLink>
+                                    <NavLink to={"/login"} className="header-login-btn" activeClassName="active-btn">Login</NavLink>
+                                    <div className="order-now">
+                                        <h1>Order now</h1>
+                                        <a href="#">1800 456 7890</a>
+                                    </div>
+                                </nav>
                             </>
                         }
                     </div>
@@ -151,11 +119,11 @@ const Header = () => {
                         toggle &&
                         <Animated animationIn="bounceInDown" animationOut="bounceInUp" isVisible={true}>            
                             <div className="nav-toggle">
-                                <Link to={"/"} className="active">Home</Link>
-                                <Link to={"/menu"}>Menu</Link>
-                                <Link to={"/about-us"}>About Us</Link>
-                                <Link to={"contact"}>Contact</Link>
-                                <Link to={"/login"} className="header-login-btn toggle-login-btn">Login</Link>
+                                <NavLink to={"/"} exact={true}  activeClassName="active-link">Home</NavLink>
+                                <NavLink to={"/menu"}  activeClassName="active-link">Menu</NavLink>
+                                <NavLink to={"/about-us"}  activeClassName="active-link">About Us</NavLink>
+                                <NavLink to={"contact"}  activeClassName="active-link">Contact</NavLink>
+                                <NavLink to={"/login"} activeClassName="active-btn" className="header-login-btn toggle-login-btn">Login</NavLink>
                             </div>
                         </Animated>
                     }
