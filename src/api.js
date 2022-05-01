@@ -85,7 +85,7 @@ export class Api{
             const rez = await this.api(`/api/customers`, 'POST', newObj);
 
             if(rez.status === 201){
-                return "success";
+                return rez.json();
             }else{
                 let data = await rez.json();
                 return data.error.message;
@@ -103,7 +103,7 @@ export class Api{
             const rez = await this.api(`/api/customers/${id}`, 'PUT', newObj);
 
             if(rez.status === 204){
-                return "update success";
+                return 'update success';
             }else{
                 let data = await rez.json();
                 return data.error.message;

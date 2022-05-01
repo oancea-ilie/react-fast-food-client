@@ -6,7 +6,7 @@ const HeroMain = () => {
     return (
         <section className="hero">
             <div className="container">
-                <img src={bgImg} alt=""/>
+                <img loading="lazy" src={bgImg} alt=""/>
 
                 <div className="text">
                     <h2>Hot Stuff</h2>

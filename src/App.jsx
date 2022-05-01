@@ -12,12 +12,14 @@ import Login from "./components/login-register/Login";
 import MainCart from "./components/cart/MainCart";
 import UserProvider from "./components/Context";
 import { GlobalSyle } from "./GlobalStyle";
-import UserDetails from "./components/user-details/UserDetails";
+import UserIndex from "./components/user-details/UserIndex";
 
 
 const App = () => {
   
   let [local, setLocal] = useState([]);
+
+  let [favLocal, setFavLocal] = useState([]);
 
   let populateLocal= ()=>{
     let arr = localStorage.getItem("Products");
@@ -33,9 +35,25 @@ const App = () => {
 
   }
 
+  let populateLocalFavoriteProducts= ()=>{
+
+    let arr = localStorage.getItem("Favorite");
+
+    if(arr){
+      arr = JSON.parse(arr);
+      setFavLocal(arr);
+    }else{
+      let empty = [];
+
+      localStorage.setItem("Favorite",JSON.stringify(empty));
+    }
+
+  }
+
   useEffect(()=>{
 
     populateLocal();
+    populateLocalFavoriteProducts();
   },[])
 
   
@@ -44,15 +62,15 @@ const App = () => {
       <UserProvider>
         <Header local = {local}/>
         <Switch>
-          <Route exact path={"/"}><MainHome populateLocal={populateLocal}/></Route>
-          <Route exact path={"/menu"}><MainMenu /></Route>
+          <Route exact path={"/"}><MainHome populateLocal={populateLocal} favLocal={favLocal} setFavLocal={setFavLocal}/></Route>
+          <Route exact path={"/menu"}><MainMenu populateLocal={populateLocal} favLocal={favLocal} setFavLocal={setFavLocal}/></Route>
           <Route exact path={"/about-us"}><MainAbout /></Route>
           <Route exact path={"/contact"}><MainContact /></Route>
           <Route exact path={"/register"}><Register /></Route>
           <Route exact path={"/login"}><Login /></Route>
           <Route exact path={"/cart"}><MainCart populateLocal={populateLocal} /></Route>
           <Route exact path={"/cart"}><MainCart populateLocal={populateLocal} /></Route>
-          <Route exact path={"/user"}><UserDetails /></Route>
+          <Route exact path={"/user"}><UserIndex favLocal={favLocal}/></Route>
         </Switch>
         <Footer/>
     </UserProvider>

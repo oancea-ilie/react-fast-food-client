@@ -7,13 +7,13 @@ import Oferte from "./Oferte";
 import Produse from "./Produse";
 import Services from "./Services";
 
-const MainHome = ({populateLocal}) => {
+const MainHome = ({populateLocal, favLocal, setFavLocal}) => {
 
     return (
         <main className="main-home">
             <HeroMain/>
             <Oferte/>
-            <Produse populateLocal={populateLocal}/>
+            <Produse populateLocal={populateLocal} favLocal={favLocal} setFavLocal={setFavLocal}/>
             <HomeSeparator/>
             <HotCombo/>
             <Delivery/>

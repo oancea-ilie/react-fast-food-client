@@ -13,11 +13,12 @@ const MainCart = ({populateLocal}) => {
     return(
         <>
         {
-            user &&
+            user?
             <main className="main-cart">
                 <HeroCart/>
                 <ContainerCart populateLocal={populateLocal}/>
             </main>
+            : history.push("/")
         }
         </>
     )

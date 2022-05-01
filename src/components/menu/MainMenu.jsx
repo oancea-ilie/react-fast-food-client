@@ -3,13 +3,13 @@ import ContainerMenu from "./ContainerMenu";
 import HeroMenu from "./HeroMenu";
 import MenuProducts from "./MenuProducts";
 
-const MainMenu = () => {
+const MainMenu = ({populateLocal,favLocal,setFavLocal}) => {
 
 
     return (
         <main className="main-menu">
             <HeroMenu/>
-            <MenuProducts/>
+            <MenuProducts populateLocal={populateLocal} favLocal={favLocal} setFavLocal={setFavLocal}/>
             <ContainerMenu/>
         </main>
     )

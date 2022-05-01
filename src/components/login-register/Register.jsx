@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
-
+import Cookies from "js-cookie";
 import Api from "../../api";
 import { Context } from "../Context";
 
@@ -116,19 +116,28 @@ const Register = () => {
 
         if(err == ''){
 
+            let date = new Date();
+            let y = date.getFullYear();
+            let m = date.getMonth();
+            let d = date.getDate();
+
+            let createdInVar = `${y}-${m}-${d}`;
+
             let obj = {
                 name : name,
                 email : email,
                 password, password,
                 confirmedPassword : confirmPassword,
                 billing_address : address,
-                phone : phone
+                phone : phone,
+                createdIn: createdInVar
             }
 
             let add = await api.createCustomer(obj);
 
-            if(add == 'success'){
-                setUser({email: email, password: password});
+            if(typeof add == 'object'){
+                setUser(add);
+                Cookies.set("authentificatedUser", JSON.stringify(add));
                 history.push("/");
             }else{
                 setErr((prev=>{

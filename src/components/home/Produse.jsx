@@ -3,8 +3,11 @@ import Api from "../../api";
 import { Context } from "../Context";
 import arrayBufferToBase64 from "../../utils";
 import { useHistory } from "react-router-dom";
+import {MdOutlineFavoriteBorder} from "react-icons/md"
+import { MdFavorite} from "react-icons/md"
 
-const Produse = ({populateLocal}) => {
+
+const Produse = ({populateLocal, favLocal, setFavLocal}) => {
 
     let [products, setProducts] = useState([]);
 
@@ -31,10 +34,10 @@ const Produse = ({populateLocal}) => {
     let populateLocalStorage=()=>{
 
         let arrLocal = localStorage.getItem('Products');
-        arrLocal = JSON.parse(arrLocal);
-
+        
         if(arrLocal){
-           setLocal(arrLocal);
+            arrLocal = JSON.parse(arrLocal);
+            setLocal(arrLocal);
         }
     }
 
@@ -81,9 +84,10 @@ const Produse = ({populateLocal}) => {
     
             let ok = 0;
             let arrLocal = localStorage.getItem('Products');
-            arrLocal = JSON.parse(arrLocal);
-    
+            
             if(arrLocal){
+                arrLocal = JSON.parse(arrLocal);
+
                 arrLocal.forEach(e=>{
                     if(e.id == product.id){
                         ok = 1;
@@ -106,12 +110,54 @@ const Produse = ({populateLocal}) => {
         if(local){
             for(let p of local){
                 if(p.id == product.id){
-
                     return true;
                 }
             }
         }
         
+    }
+
+    const handleFavoriteBtn = (product, event) =>{
+        event.preventDefault();
+
+        if(user == null || user == undefined){
+            history.push("/login");
+        }else{
+            let ok = 0 ;
+
+            let favLocal = localStorage.getItem('Favorite');
+            favLocal = JSON.parse(favLocal);
+    
+            if(favLocal){
+                favLocal.forEach(e=>{
+                    if(e.id == product.id){
+                        ok = 1;
+                        let newArr = favLocal.filter(e=> e.id != product.id);
+
+                        localStorage.setItem("Favorite", JSON.stringify(newArr));
+                        setFavLocal(newArr);
+                    }
+                })
+            }
+    
+            if(ok == 0){
+                favLocal.push(product);
+                let favJSON = JSON.stringify(favLocal);
+                localStorage.setItem('Favorite', favJSON);
+                setFavLocal(favLocal);
+            }
+
+        }
+    }
+
+    const verifyFavorite = (product) =>{
+        if(favLocal){
+            for(let p of favLocal){
+                if(p.id == product.id){
+                    return true;
+                }
+            }
+        }
     }
 
     useEffect(()=>{
@@ -142,35 +188,43 @@ const Produse = ({populateLocal}) => {
                 {
                     products &&
                         products.map((e)=>{
+                            let v = verifyCart(e);
+                            let f = verifyFavorite(e);
+
                             if(e.fk_category_id){
                                 return (
                                      <div key={e.id} className="card">
                                         <div className="product-card-img">
-                                            <img src={"data:image/png;base64," + arrayBufferToBase64(e.fk_product_id_product_category.image.data)} alt=""/>
+                                            <img loading="lazy" src={"data:image/png;base64," + arrayBufferToBase64(e.fk_product_id_product_category.image.data)} alt=""/>
                                         </div>
                                         <h1>{e.fk_product_id_product_category.name}</h1>
                                         <p>{e.fk_product_id_product_category.description}</p>
                                         <h2>${e.fk_product_id_product_category.price}</h2>
-                                        <button href="#" onClick={(event)=>{handleOrderBtn(e)}}>
-                                            ORDER NOW
-                                        </button>
+                                        {
+                                                v && user?<button href="#"  className="product-btn2" disabled>ORDERED</button>
+                                                :<button href="#"  className="product-btn"onClick={(event)=>{handleOrderBtn(e,event)}}>ORDER NOW</button>
+                                        }  
+                                        {
+                                             f && user? <MdFavorite className="productFavIcon" onClick={(event)=>{handleFavoriteBtn(e,event)}}/> : <MdOutlineFavoriteBorder className="productFavIcon" onClick={(event)=>{handleFavoriteBtn(e,event)}}/>
+                                        }
                                     </div>
                                 )
                             }else{
-
-                                let v = verifyCart(e);
                                 return <div key={e.id} className="card">
-                                    <div className="product-card-img">
-                                        <img src={"data:image/png;base64," + arrayBufferToBase64(e.image.data) } alt=""/>
-                                    </div>
-                                    <h1>{e.name}</h1>
-                                    <p>{e.description}</p>
-                                    <h2>${e.price}</h2>
-                                    {
-                                        v?<button href="#"  className="product-btn2" disabled>ORDERED</button>
-                                        :<button href="#"  className="product-btn"onClick={(event)=>{handleOrderBtn(e,event)}}>ORDER NOW</button>
-                                    }   
-                                </div>
+                                            <div className="product-card-img">
+                                                <img loading="lazy" src={"data:image/png;base64," + arrayBufferToBase64(e.image.data) } alt=""/>
+                                            </div>
+                                            <h1>{e.name}</h1>
+                                            <p>{e.description}</p>
+                                            <h2>${e.price}</h2>
+                                            {
+                                                v && user?<button href="#"  className="product-btn2" disabled>ORDERED</button>
+                                                :<button href="#"  className="product-btn"onClick={(event)=>{handleOrderBtn(e,event)}}>ORDER NOW</button>
+                                            }
+                                            {
+                                                f && user? <MdFavorite className="productFavIcon" onClick={(event)=>{handleFavoriteBtn(e,event)}}/> : <MdOutlineFavoriteBorder className="productFavIcon" onClick={ (event)=>{handleFavoriteBtn(e,event)}}/>
+                                            }
+                                        </div>
                             }
                         })
                 }

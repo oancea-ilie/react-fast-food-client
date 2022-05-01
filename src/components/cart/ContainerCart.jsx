@@ -98,7 +98,7 @@ const ContainerCart = ({populateLocal}) => {
                                 {
                                     products.map(e=>{
                                         return (
-                                            <CartProduct key={e.id} handleProductCopy={handleProductCopy} product={e} populateLocal={populateLocal} populateProducts = {populateProducts} setProductsCopy={setProductsCopy}
+                                            <CartProduct fk={e.fk_product_id_product_category} key={e.id} handleProductCopy={handleProductCopy} product={e} populateLocal={populateLocal} populateProducts = {populateProducts} setProductsCopy={setProductsCopy}
                                             productsCopy = {productsCopy}/>
                                         )
                                     })

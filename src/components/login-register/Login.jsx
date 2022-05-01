@@ -52,9 +52,11 @@ const Login = () => {
         check();
 
         if(err == ''){
-            let obj = {email: email, password: pass};
+            let obj = { email: email, password: pass};
 
             let rez = await api.login(obj);
+            
+            obj.id = rez.id;
 
             if(typeof rez =="object"){
                 

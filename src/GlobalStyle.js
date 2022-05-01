@@ -289,6 +289,7 @@ template {
 }
 
 header {
+  box-shadow: 0px 5px 4px 0px rgba(0, 0, 0, 0.1);
   background-color: #a41a13;
   position: relative;
   z-index: 2;
@@ -358,6 +359,10 @@ header .nav-toggle a:hover {
 @media (min-width: 768px) {
   header {
     box-shadow: 0px 5px 4px 0px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 999;
   }
   header .container {
     border: none;
@@ -376,7 +381,7 @@ header .nav-toggle a:hover {
   header .container nav a {
     color: white;
     font-size: 1rem;
-    font-weight: 400;
+    font-weight: 300;
     transition: 0.3s all;
   }
   header .container nav a:hover {
@@ -1098,7 +1103,8 @@ footer .footer-footer p span:hover {
   display: grid;
   grid-gap: 2rem;
 }
-.products .body .card {
+.body .card {
+  position: relative;
   box-shadow: 0px 5px 4px 0px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
   background-color: white;
@@ -1108,6 +1114,19 @@ footer .footer-footer p span:hover {
   justify-content: space-between;
   align-items: center;
 }
+.productFavIcon {
+  font-size: 1.7rem;
+  color: #a41a13;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  transition: .2s all;
+  cursor: pointer;
+}
+.productFavIcon:hover {
+  color: #eec300;
+}
+
 .product-card-img{
   display: flex;
   flex-direction: column;
@@ -1137,7 +1156,7 @@ footer .footer-footer p span:hover {
   color: #e93030;
   font-weight: 900;
 }
-.products .body .card button {
+.body .card button {
   background-color: #a41a13;
   width: 90%;
   margin: 0 auto;
@@ -1148,7 +1167,7 @@ footer .footer-footer p span:hover {
   transition: 0.4s all;
   font-weight: bold;
 }
-.products .body .card button:hover {
+.body .card button:hover {
   background-color: #eec300;
 }
 @media (min-width: 600px) {
@@ -2822,6 +2841,7 @@ footer .footer-footer p span:hover {
   color: #eec300;
 }
 @media (min-width: 768px) {
+
   .header-login {
     box-shadow: 0px 5px 4px 0px rgba(0, 0, 0, 0.1);
     position: sticky;
@@ -2830,7 +2850,13 @@ footer .footer-footer p span:hover {
     z-index: 999;
   }
   .header-login .container {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
     border: none;
+  }
+  .header-login .container img {
+    margin-top: 0.5rem;
+    width: 90px;
   }
   .header-login .container .fa-bars {
     display: none;
@@ -2867,10 +2893,33 @@ footer .footer-footer p span:hover {
   .header-login .container nav .user-deatils svg:hover {
     color: #eec300;
   }
-  .header-login .container nav .user-deatils .user-btn {
+  .header-login .container nav .user-deatils .userImage {
     margin-left: 1rem;
-    color: white;
+    position: relative;
+    background-color: #0f1924;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    transition: .3s all;
   }
+  .header-login .container nav .user-deatils .userImage:hover {
+    border: 1px solid white;
+  }
+  .userImageLink:hover{
+    color: white !important;
+  }
+  .header-login .container nav .user-deatils .userImage p {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    font-size: 1.3rem;
+  }
+
+  .header-login .container nav .user-deatils .userImage img {
+    display: none;
+  }
+
   .header-login .container nav .user-deatils .cart-btn {
     margin-right: 0.8rem;
   }
@@ -3133,12 +3182,17 @@ footer .footer-footer p span:hover {
     margin-left: auto;
   }
   .header-login-btn{
+    padding: 0.4rem 0.7rem !important;
     margin-top: 0rem !important;
   }
 }
 @media (min-width: 1024px) {
   .container-cart .total-container {
     margin-right: 2.4rem;
+  }
+  .header-login-btn{
+    padding: 0.4rem 2.5rem !important;
+    margin-top: 0rem !important;
   }
 }
 
@@ -3205,5 +3259,527 @@ footer .footer-footer p span:hover {
   width: 300px;
   position: relative;
 }
+
+
+
+// User
+
+
+.userHero {
+  height: 250px;
+  background-image: url(bgHome);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.userHero h1 {
+  font-family: "Playfair Display", serif;
+  font-size: 2.2rem;
+  color: white;
+  font-weight: 600;
+}
+.userHero .link-cards {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+}
+.userHero .link-cards p {
+  color: white;
+  margin: 0 0.7rem;
+}
+.userHero .link-cards a {
+  font-size: 0.9rem;
+  color: white;
+  background-color: none;
+}
+.userHero .link-cards .active {
+  color: #de9692;
+  transition: 0.4s all;
+}
+.userHero .link-cards .active:hover {
+  color: white;
+}
+@media (min-width: 500px) {
+  .userHero h1 {
+    font-size: 2.6rem;
+  }
+}
+@media (min-width: 600px) {
+  .userHero {
+    height: 370px;
+  }
+}
+@media (min-width: 768px) {
+  .userHero h1 {
+    font-size: 3.8rem;
+  }
+}
+
+.userContainer {
+  display: grid;
+  padding: 3rem 0;
+}
+.userContainer .userMenu {
+  display: flex;
+  flex-direction: column;
+}
+.userContainer .userMenu a {
+  width: 90%;
+  max-width: 450px;
+  margin: 0 auto;
+  background-color: #242424;
+  margin-top: 0.2rem;
+  border-radius: 15px;
+  padding: 1.5rem;
+  text-align: center;
+  color: white;
+  font-size: 0.9rem;
+  box-shadow: 0px 5px 4px 0px rgba(0, 0, 0, 0.1);
+  transition: 0.3s all;
+}
+.userContainer .userMenu a:last-of-type {
+  margin-bottom: 0.2rem;
+}
+.userContainer .userMenu a:hover {
+  background-color: #a41a13;
+}
+.userContainer .userMenu .userActive {
+  background-color: #a41a13;
+}
+@media (min-width: 768px) {
+  .userContainer {
+    grid-template-columns: 30% 70%;
+    margin: 0 auto;
+  }
+}
+@media (min-width: 1024px) {
+  .userContainer {
+    max-width: 1200px;
+  }
+}
+@media (min-width: 1600px) {
+  .userContainer {
+    max-width: 1600px;
+  }
+}
+
+.userInfoContainer .detailsInfo {
+  margin-top: 1rem;
+}
+.userInfoContainer .detailsInfo .card {
+  padding: 0.5rem;
+  box-shadow: 0px 5px 4px 0px rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
+  width: 90%;
+  max-width: 450px;
+  background-color: white;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.userInfoContainer .detailsInfo .card .avatarNoImage {
+  margin: 1rem 0;
+  margin-bottom: 1.5rem;
+  position: relative;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background-color: #242424;
+}
+.userInfoContainer .detailsInfo .card .avatarNoImage .avatarName {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 1.6rem;
+}
+.userInfoContainer .detailsInfo .card .avatarNoImage .editBtn {
+  position: absolute;
+  right: 5px;
+  bottom: 0px;
+  color: white;
+  background-color: #eec300;
+  border-radius: 50%;
+  padding: 0.5rem;
+  text-align: center;
+  font-size: 1.2rem;
+  transition: 0.4s all;
+  cursor: pointer;
+}
+.userInfoContainer .detailsInfo .card .avatarNoImage .editBtn:hover {
+  background-color: #a41a13;
+}
+.userInfoContainer .detailsInfo .card .avatarImageContainer {
+  display: none;
+}
+.userInfoContainer .detailsInfo .card .text {
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+.userInfoContainer .detailsInfo .card .text h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+.userInfoContainer .detailsInfo .card .text h3 span {
+  display: inline-block;
+  margin-left: 0.3rem;
+  font-size: 1rem;
+  font-weight: 400;
+}
+.userInfoContainer .detailsInfo .thanks {
+  text-align: center;
+  padding: 1.5rem;
+  max-width: 450px;
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 1rem;
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0px 5px 4px 0px rgba(0, 0, 0, 0.1);
+}
+.userInfoContainer .detailsInfo .thanks p {
+  font-size: 1rem;
+  font-weight: 500;
+}
+.userInfoContainer .detailsInfo .thanks p span {
+  font-weight: bold;
+  font-size: inherit;
+  color: #a41a13;
+}
+.userInfoContainer .detailsInfo .thanks p:first-of-type {
+  margin-bottom: 0.5rem;
+}
+.userInfoContainer .detailsInfo .userFavoriteBtn {
+  display: block;
+  background-color: white;
+  width: 90%;
+  max-width: 450px;
+  margin: 0 auto;
+  margin-top: 1rem;
+  border-radius: 15px;
+  box-shadow: 0px 5px 4px 0px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  background-color: #eec300;
+  color: white;
+  font-size: 1rem;
+  text-align: center;
+  transition: 0.4s all;
+  max-height: 70px;
+}
+.userInfoContainer .detailsInfo .userFavoriteBtn:hover {
+  background-color: #a41a13;
+}
+.userInfoContainer .detailsInfo .activity {
+  padding: 1rem;
+  box-shadow: 0px 5px 4px 0px rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
+  margin-top: 1rem;
+  width: 90%;
+  max-width: 450px;
+  background-color: white;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.userInfoContainer .detailsInfo .activity .box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+.userInfoContainer .detailsInfo .activity .box svg {
+  font-size: 2.8rem;
+  color: #242424;
+}
+.userInfoContainer .detailsInfo .activity .box p {
+  font-size: 1rem;
+  margin-top: 0.5rem;
+  font-weight: 500;
+}
+.userInfoContainer .detailsInfo .activity .box p span {
+  font-weight: bold;
+  color: #a41a13;
+  font-size: inherit;
+}
+.userInfoContainer .detailsInfo .activity .box:first-of-type {
+  margin-bottom: 1.5rem;
+}
+.userInfoContainer .detailsInfo .activity .box:first-of-type svg {
+  color: #a41a13;
+}
+.userInfoContainer .ordersInfo {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 1rem;
+}
+.userInfoContainer .ordersInfo .order {
+  max-width: 450px;
+  box-shadow: 0px 5px 4px 0px rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
+  width: 90%;
+  border-radius: 15px;
+  background-color: #eec300;
+  text-align: center;
+  padding: 1rem;
+}
+.userInfoContainer .ordersInfo .order h1 {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+.userInfoContainer .ordersInfo .order h1 span {
+  font-size: inherit;
+  font-weight: bold;
+  color: #a41a13;
+}
+.userInfoContainer .ordersInfo .order p {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+.userInfoContainer .ordersInfo .order p span {
+  font-size: inherit;
+  font-weight: bold;
+  color: #a41a13;
+}
+.userInfoContainer .ordersInfo .order h2 {
+  font-size: 1rem;
+}
+.userInfoContainer .ordersInfo .order h2 span {
+  font-size: inherit;
+  font-weight: bold;
+  color: #a41a13;
+}
+.userInfoContainer .favoriteInfo {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 1rem;
+}
+.userInfoContainer .favoriteInfo .favoriteCard {
+  background-color: white;
+  border-radius: 15px;
+  max-width: 450px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  width: 90%;
+  margin: 0 auto;
+  transition: 0.4s all;
+}
+.userInfoContainer .favoriteInfo .favoriteCard img {
+  width: 150px;
+  margin-bottom: 0.5rem;
+}
+.userInfoContainer .favoriteInfo .favoriteCard h1 {
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+}
+.userInfoContainer .favoriteInfo .favoriteCard p {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+.userInfoContainer .favoriteInfo .favoriteCard p span {
+  font-size: inherit;
+  color: #a41a13;
+  font-weight: bold;
+}
+.userInfoContainer .favoriteInfo .favoriteCard:hover {
+  background-color: #242424;
+  color: white;
+}
+.userInfoContainer .favoriteInfo .favoriteCard:hover span {
+  color: #eec300;
+}
+.userInfoContainer .accountInfo {
+  margin-top: 2rem;
+}
+.userInfoContainer .accountInfo .card .box {
+  width: 90%;
+  max-width: 450px;
+  border-radius: 15px;
+  margin: 0 auto;
+  margin-top: 1rem;
+  background-color: #242424;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+.userInfoContainer .accountInfo .card .box p:first-of-type {
+  margin-top: 0;
+}
+.userInfoContainer .accountInfo .card .box p {
+  font-size: 1rem;
+  color: white;
+  margin: 0.5rem 0;
+}
+.userInfoContainer .accountInfo .card .box .inputBox {
+  display: flex;
+  align-items: center;
+}
+.userInfoContainer .accountInfo .card .box .inputBox input {
+  width: 80%;
+  font-size: 1rem;
+  border-radius: 5px 0 0 5px;
+  border-right: none;
+}
+.userInfoContainer .accountInfo .card .box .inputBox button {
+  width: 20%;
+  height: 28px;
+  border-radius: 0 5px 5px 0;
+}
+.userInfoContainer .accountInfo .card a {
+  box-shadow: 0px 5px 4px 0px rgba(0, 0, 0, 0.1);
+  background-color: #242424;
+  width: 90%;
+  max-width: 450px;
+  margin: 0 auto;
+  display: block;
+  color: #a41a13;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 15px;
+  text-align: center;
+  padding: 1rem;
+  transition: 0.4s all;
+  margin-top: 1rem;
+}
+.userInfoContainer .accountInfo .card a:hover {
+  color: #eec300;
+}
+@media (min-width: 768px) {
+  .userInfoContainer .detailsInfo {
+    margin-top: 0.3rem;
+    margin-right: 0.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+  }
+  .userInfoContainer .detailsInfo .card {
+    margin: 0;
+  }
+  .userInfoContainer .detailsInfo .thanks {
+    margin: 0;
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .userInfoContainer .detailsInfo .userFavoriteBtn {
+    margin: 0;
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .userInfoContainer .detailsInfo .activity {
+    margin-top: 0rem;
+  }
+  .userInfoContainer .ordersInfo {
+    margin-top: 0rem;
+    grid-template-columns: 1fr 1fr;
+  }
+  .userInfoContainer .favoriteInfo {
+    margin-top: 0rem;
+    grid-column-gap: 0;
+    grid-template-columns: 1fr 1fr;
+  }
+  .userInfoContainer .accountInfo {
+    margin-top: 0rem;
+  }
+  .userInfoContainer .accountInfo .card {
+    margin: 0;
+    margin-left: 1rem;
+  }
+  .userInfoContainer .accountInfo .card .box {
+    margin: 0;
+    margin-top: 1rem;
+  }
+  .userInfoContainer .accountInfo .card .box:first-of-type {
+    margin-top: 0;
+  }
+  .userInfoContainer .accountInfo .card a {
+    margin: 0;
+    margin-top: 1rem;
+  }
+}
+@media (min-width: 1024px) {
+  .userInfoContainer .detailsInfo {
+    grid-template-columns: 1fr 1fr;
+  }
+  .userInfoContainer .detailsInfo .activity {
+    margin-top: 0rem;
+  }
+  .userInfoContainer .detailsInfo .thanks {
+    margin-top: 1rem;
+  }
+  .userInfoContainer .ordersInfo {
+    grid-column-gap: 0;
+    grid-template-columns: 1fr 1fr;
+  }
+  .userInfoContainer .favoriteInfo {
+    grid-column-gap: 0;
+    grid-template-columns: 1fr 1fr;
+  }
+  .userInfoContainer .accountInfo .card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .userInfoContainer .accountInfo .card .box {
+    margin-top: 0;
+  }
+}
+@media (min-width: 1600px) {
+  .userInfoContainer .detailsInfo {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .userInfoContainer .detailsInfo .thanks {
+    margin-top: 0;
+  }
+  .userInfoContainer .ordersInfo {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .userInfoContainer .favoriteInfo {
+    margin-top: 0rem;
+    grid-column-gap: 0;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .userInfoContainer .accountInfo .card {
+    justify-items: center;
+  }
+  .userInfoContainer .accountInfo .card .box {
+    max-width: 600px;
+    padding: 2.1rem;
+  }
+  .userInfoContainer .accountInfo .card a {
+    max-width: 500px;
+  }
+}
+.userDetailsMain {
+  background-color: rgba(202, 202, 202, 0.5137254902);
+}
+
+
+.notFound{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+} 
+
+.notFound img{
+  width: 270px;
+}
+
 
 `
