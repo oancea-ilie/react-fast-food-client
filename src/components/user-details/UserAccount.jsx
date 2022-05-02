@@ -34,8 +34,9 @@ const UserAccount = () => {
 
                     let username = user;
                     username.name = obj.name;
-                    setUser(username);
 
+                    setUser(username);
+                    
                     alert(update);
                 }
             }

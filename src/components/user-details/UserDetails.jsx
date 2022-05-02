@@ -73,7 +73,7 @@ const UserDetails = ({favLocal}) => {
         <div className="activity">
             <div className="box">
                 <SiLinuxcontainers></SiLinuxcontainers>
-                <p> <span>4</span> orders</p>
+                <p> <span>0</span> orders</p>
             </div>
             <div className="box">
                 <MdOutlineFavoriteBorder  className="favoriteIcon"></MdOutlineFavoriteBorder>

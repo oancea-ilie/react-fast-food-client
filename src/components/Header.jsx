@@ -10,6 +10,9 @@ import Cookies from "js-cookie";
 import { useHistory } from "react-router-dom";
 import {Animated} from "react-animated-css";
 import { NavLink } from "react-router-dom";
+import {RiUser3Line} from "react-icons/ri"
+import {BsBag} from "react-icons/bs"
+
 
 const Header = ({local}) => {
 
@@ -18,6 +21,23 @@ const Header = ({local}) => {
     let [toggle, setToggle] = useState(true);
 
     let history = useHistory();
+
+    const randomColor = ["#5EBEC4", "#F92C85", "#ABF62D","#D6A3FB","#FECD45","#2568FB","#A0AECD"];
+
+    const [color, setColor] = useState();
+  
+    const handleRandomColor = (min,max) =>{
+      return Math.random() * (max- min)+min;
+    }
+  
+  
+    useEffect(()=>{
+      let index = handleRandomColor(0, randomColor.length);
+      index = parseInt(index);
+      setColor(randomColor[index]);
+  
+    },[])
+
 
     let corectie = ()=>{
         let img = document.querySelector(".logo");
@@ -55,23 +75,27 @@ const Header = ({local}) => {
                         <Link to={"/"} className="brand">
                             <img src={Logo2} className="logo" alt="logo"/>
                         </Link>
-                        {
-                            toggle
-                            ?
-                                <GrClose className="fas fa-bars" onClick={()=>{setToggle(false)}}/>
-                            : 
-                            <>
-                                <FiMenu className="fas fa-bars" onClick={()=>{setToggle(true)}}/> 
-                            <nav>
-                                <NavLink to={"/"} exact={true} activeClassName="active-link">Home</NavLink>
-                                <NavLink to={"/menu"} activeClassName="active-link">Menu</NavLink>
-                                <NavLink to={"/about-us"} activeClassName="active-link">About Us</NavLink>
-                                <NavLink to={"/contact"} activeClassName="active-link">Contact</NavLink>
-                                <NavLink to={"/"} className="header-login-btn" onClick={handleLogout}>Logout</NavLink>
-                                <HeaderRight local = {local}/>
-                            </nav>
-                            </>
-                        }
+                        <div className="iconsContainer">
+                            <Link to={"/user"}><RiUser3Line size={32} className="header-icon"/></Link>
+                            <Link to={"/cart"}><BsBag  size={30} className="header-icon"/></Link>
+                            {
+                                toggle
+                                ?
+                                    <GrClose className="fas fa-bars" onClick={()=>{setToggle(false)}}/>
+                                : 
+                                <>
+                                    <FiMenu className="fas fa-bars" onClick={()=>{setToggle(true)}}/> 
+                                <nav>
+                                    <NavLink to={"/"} exact={true} activeClassName="active-link">Home</NavLink>
+                                    <NavLink to={"/menu"} activeClassName="active-link">Menu</NavLink>
+                                    <NavLink to={"/about-us"} activeClassName="active-link">About Us</NavLink>
+                                    <NavLink to={"/contact"} activeClassName="active-link">Contact</NavLink>
+                                    <NavLink to={"/"} className="header-login-btn" onClick={handleLogout}>Logout</NavLink>
+                                    <HeaderRight local = {local}/>
+                                </nav>
+                                </>
+                            }
+                        </div>
                     </div>
             
                     {

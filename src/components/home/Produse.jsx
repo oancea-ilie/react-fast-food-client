@@ -22,10 +22,9 @@ const Produse = ({populateLocal, favLocal, setFavLocal}) => {
     let populateProducts = async()=>{
         
         let rez = await api.getAllProducts();
-
+        
         if(typeof rez != 'string'){
             setProducts(rez);
-
         }else{
             console.log(rez);
         }
@@ -163,6 +162,7 @@ const Produse = ({populateLocal, favLocal, setFavLocal}) => {
     useEffect(()=>{
         populateProducts();
         populateLocalStorage();
+
     },[]);
 
     return (

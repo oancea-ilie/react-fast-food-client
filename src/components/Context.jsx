@@ -6,7 +6,7 @@ export const Context = createContext();
 const UserProvider=({children})=>{
 
     const [user, setUser] = useState(undefined);
-
+    
     useEffect(()=>{
         if(Cookies.get("authentificatedUser")){
             setUser(JSON.parse(Cookies.get("authentificatedUser")));

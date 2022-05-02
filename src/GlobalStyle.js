@@ -1103,7 +1103,7 @@ footer .footer-footer p span:hover {
   display: grid;
   grid-gap: 2rem;
 }
-.body .card {
+ .body .card {
   position: relative;
   box-shadow: 0px 5px 4px 0px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
@@ -3582,6 +3582,7 @@ footer .footer-footer p span:hover {
   margin-bottom: 0.5rem;
 }
 .userInfoContainer .favoriteInfo .favoriteCard h1 {
+  text-align: center;
   font-size: 1.4rem;
   margin-bottom: 0.5rem;
 }
@@ -3781,5 +3782,26 @@ footer .footer-footer p span:hover {
   width: 270px;
 }
 
+.header-icon{
+  font-size: 1.5rem;
+  color: white;
+  transition: .3s all;
+}
+.header-icon:hover{
+  color: #eec300;
+}
 
+.iconsContainer{
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+
+@media (min-width: 768px) {
+
+  .iconsContainer .header-icon{
+    display: none;
+  }
+}
 `

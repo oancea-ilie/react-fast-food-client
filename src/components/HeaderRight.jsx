@@ -7,7 +7,7 @@ const HeaderRight = ({local}) => {
 
   let [user, setUser] = useContext(Context);
 
-  const randomColor = ["#FDF5DF","#5EBEC4", "#F92C85", "#ABF62D","#D6A3FB","#FECD45","#2568FB","#A0AECD"];
+  const randomColor = ["#5EBEC4", "#F92C85", "#ABF62D","#D6A3FB","#FECD45","#2568FB","#A0AECD"];
 
   const [color, setColor] = useState();
 
