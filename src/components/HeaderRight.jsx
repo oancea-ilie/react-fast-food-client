@@ -1,47 +1,54 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
-import {BsBag} from "react-icons/bs"
-import {Context} from "./Context"
+import React, { useContext, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { BsBag } from 'react-icons/bs';
+import { Context } from './Context';
 
-const HeaderRight = ({local}) => {
-
+const HeaderRight = ({ local }) => {
   let [user, setUser] = useContext(Context);
 
-  const randomColor = ["#5EBEC4", "#F92C85", "#ABF62D","#D6A3FB","#FECD45","#2568FB","#A0AECD"];
+  const randomColor = [
+    '#5EBEC4',
+    '#F92C85',
+    '#ABF62D',
+    '#D6A3FB',
+    '#FECD45',
+    '#2568FB',
+    '#A0AECD',
+  ];
 
   const [color, setColor] = useState();
 
-  const handleRandomColor = (min,max) =>{
-    return Math.random() * (max- min)+min;
-  }
+  const handleRandomColor = (min, max) => {
+    return Math.random() * (max - min) + min;
+  };
 
-
-  useEffect(()=>{
+  useEffect(() => {
     let index = handleRandomColor(0, randomColor.length);
     index = parseInt(index);
     setColor(randomColor[index]);
-
-  },[])
+  }, []);
 
   return (
     <div className="user-deatils">
-        <Link to={"/cart"}><BsBag className="cart-btn"/></Link>
-        <div className="text">
-            <h3>Shopping Cart</h3>
-            <p>{local ? local.length : 0 } items</p>
+      <Link to={'/cart'}>
+        <BsBag className="cart-btn" />
+      </Link>
+      <div className="text">
+        <h3>Shopping Cart</h3>
+        <p>{local ? local.length : 0} items</p>
+      </div>
+      <Link to={'/user'} className="userImageLink">
+        <div className="userImage" style={{ backgroundColor: `${color}` }}>
+          <img src="#" alt="" />
+          {user.username ? (
+            <p>{user.username[0].toUpperCase()}</p>
+          ) : (
+            <p>{user.name[0].toUpperCase()}</p>
+          )}
         </div>
-        <Link to={"/user"} className="userImageLink">
-          <div className="userImage" style={{backgroundColor : `${color}`}}>
-            <img src="#" alt=""/>
-            {
-              user.username?
-              <p>{user.username[0].toUpperCase()}</p>
-              : <p>{user.name[0].toUpperCase()}</p>
-            }
-          </div>
-        </Link>
+      </Link>
     </div>
-  )
-}
+  );
+};
 
-export default HeaderRight
+export default HeaderRight;

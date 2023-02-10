@@ -1,635 +1,533 @@
-import { Buffer } from "buffer";
+export class Api {
+  api(path, method = 'GET', body = null, token = null) {
+    const options = {
+      method,
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+    };
 
-export class Api{
-
-    api(path, method = 'GET', body= null, token = null){
-    
-        const options={
-            method,
-            headers:{
-                'Content-Type':'application/json;charset=utf-8'
-            }
-        };
-    
-        if(body !=null){
-            options.body = JSON.stringify(body);
-        }
-    
-        // pentru perimisuni in functie de utilizator
-        if(token){
-            options.headers['Authorization']= `Bearer ${token}`;
-        }
-    
-        return fetch( path, options);
+    if (body != null) {
+      options.body = JSON.stringify(body);
     }
 
-    // CUSTOMERS
-    async login(user){
-        try{
-            const rez = await this.api('/api/customers/login','POST', user);
-            if(rez.status === 200){
-                return rez.json();
-            }else{
-                let data = await rez.json();
-                return data.error.message;
-            }
-
-        }catch(e){
-            throw new Error(e);
-        }
-        
+    if (token) {
+      options.headers['Authorization'] = `Bearer ${token}`;
     }
 
-    async getAllCusotmers(user){
-        
-        try{
-            const rez = await this.api('/api/customers', 'GET', null, true, {
-                username: user.email,
-                password: user.password
-            });
+    return fetch(path, options);
+  }
 
-            if(rez.status === 200){
-                return rez.json();
-            }else{
-                let data = await rez.json();
-                return data.error.message;
-            }
-
-        }catch(e){
-            throw new Error(e);
-        }
-        
+  // CUSTOMERS
+  async login(user) {
+    try {
+      const rez = await this.api('/api/customers/login', 'POST', user);
+      if (rez.status === 200) {
+        return rez.json();
+      } else {
+        let data = await rez.json();
+        return data.error.message;
+      }
+    } catch (e) {
+      throw new Error(e);
     }
+  }
 
-    async getCustomerByID(id){
-        
-        try{
-            const rez = await this.api(`/api/customers/${id}`);
+  async getAllCusotmers(user) {
+    try {
+      const rez = await this.api('/api/customers', 'GET', null, true, {
+        username: user.email,
+        password: user.password,
+      });
 
-            if(rez.status === 200){
-                return rez.json();
-            }else{
-                let data = await rez.json();
-                return data.error.message;
-            }
-
-        }catch(e){
-            throw new Error(e);
-        }
-        
+      if (rez.status === 200) {
+        return rez.json();
+      } else {
+        let data = await rez.json();
+        return data.error.message;
+      }
+    } catch (e) {
+      throw new Error(e);
     }
+  }
 
-    async createCustomer(newObj){
-        
-        try{
-            const rez = await this.api(`/api/customers`, 'POST', newObj);
+  async getCustomerByID(id) {
+    try {
+      const rez = await this.api(`/api/customers/${id}`);
 
-            if(rez.status === 201){
-                return rez.json();
-            }else{
-                let data = await rez.json();
-                return data.error.message;
-            }
-
-        }catch(e){
-            throw new Error(e);
-        }
-        
+      if (rez.status === 200) {
+        return rez.json();
+      } else {
+        let data = await rez.json();
+        return data.error.message;
+      }
+    } catch (e) {
+      throw new Error(e);
     }
+  }
 
-    async updateCustomer(newObj,id){
-        
-        try{
-            const rez = await this.api(`/api/customers/${id}`, 'PUT', newObj);
+  async createCustomer(newObj) {
+    try {
+      const rez = await this.api(`/api/customers`, 'POST', newObj);
 
-            if(rez.status === 204){
-                return 'update success';
-            }else{
-                let data = await rez.json();
-                return data.error.message;
-            }
-
-        }catch(e){
-            throw new Error(e);
-        }
-        
+      if (rez.status === 201) {
+        return rez.json();
+      } else {
+        let data = await rez.json();
+        return data.error.message;
+      }
+    } catch (e) {
+      throw new Error(e);
     }
+  }
 
-    async deleteCustomer(id){
-        
-        try{
-            const rez = await this.api(`/api/customers/${id}`, 'DELETE');
+  async updateCustomer(newObj, id) {
+    try {
+      const rez = await this.api(`/api/customers/${id}`, 'PUT', newObj);
 
-            if(rez.status === 204){
-                return "delete success";
-            }else{
-                let data = await rez.json();
-                return data.error.message;
-            }
-
-        }catch(e){
-            throw new Error(e);
-        }
-        
+      if (rez.status === 204) {
+        return 'update success';
+      } else {
+        let data = await rez.json();
+        return data.error.message;
+      }
+    } catch (e) {
+      throw new Error(e);
     }
-    
-    // PRODUCTS
+  }
 
-    async getAllProducts(token){
-        
-        try{
-            const rez = await this.api('/api/products');
-            if(rez.status === 200){
-                return rez.json();
-            }else{
-                let data = await rez.json();
-                return data.error.message;
-            }
+  async deleteCustomer(id) {
+    try {
+      const rez = await this.api(`/api/customers/${id}`, 'DELETE');
 
-        }catch(e){
-            throw new Error(e);
-        }
-        
+      if (rez.status === 204) {
+        return 'delete success';
+      } else {
+        let data = await rez.json();
+        return data.error.message;
+      }
+    } catch (e) {
+      throw new Error(e);
     }
+  }
 
-    async getProductByID(id){
-        
-        try{
-            const rez = await this.api(`/api/products/${id}`);
+  // PRODUCTS
 
-            if(rez.status === 200){
-                return rez.json();
-            }else{
-                let data = await rez.json();
-                return data.error.message;
-            }
-
-        }catch(e){
-            throw new Error(e);
-        }
-        
+  async getAllProducts() {
+    try {
+      const rez = await this.api('/api/products');
+      if (rez.status === 200) {
+        return rez.json();
+      } else {
+        let data = await rez.json();
+        return data.error.message;
+      }
+    } catch (e) {
+      throw new Error(e);
     }
+  }
 
-    async createProduct(newObj){
-        
-        try{
-            const rez = await this.api(`/api/products`, 'POST', newObj);
+  async getProductByID(id) {
+    try {
+      const rez = await this.api(`/api/products/${id}`);
 
-            if(rez.status === 204){
-                return "create success";
-            }else{
-                let data = await rez.json();
-                return data.error.message;
-            }
-
-        }catch(e){
-            throw new Error(e);
-        }
-        
+      if (rez.status === 200) {
+        return rez.json();
+      } else {
+        let data = await rez.json();
+        return data.error.message;
+      }
+    } catch (e) {
+      throw new Error(e);
     }
+  }
 
-    async updateProduct(newObj,id){
-        
-        try{
-            const rez = await this.api(`/api/products/${id}`, 'PUT', newObj);
+  async createProduct(newObj) {
+    try {
+      const rez = await this.api(`/api/products`, 'POST', newObj);
 
-            if(rez.status === 204){
-                return "update success";
-            }else{
-                let data = await rez.json();
-                return data.error.message;
-            }
-
-        }catch(e){
-            throw new Error(e);
-        }
-        
+      if (rez.status === 204) {
+        return 'create success';
+      } else {
+        let data = await rez.json();
+        return data.error.message;
+      }
+    } catch (e) {
+      throw new Error(e);
     }
+  }
 
-    async deleteProduct(id){
-        
-        try{
-            const rez = await this.api(`/api/products/${id}`, 'DELETE');
+  async updateProduct(newObj, id) {
+    try {
+      const rez = await this.api(`/api/products/${id}`, 'PUT', newObj);
 
-            if(rez.status === 204){
-                return "delete success";
-            }else{
-                let data = await rez.json();
-                return data.error.message;
-            }
-
-        }catch(e){
-            throw new Error(e);
-        }
-        
+      if (rez.status === 204) {
+        return 'update success';
+      } else {
+        let data = await rez.json();
+        return data.error.message;
+      }
+    } catch (e) {
+      throw new Error(e);
     }
+  }
 
-    // CATEGORIES
+  async deleteProduct(id) {
+    try {
+      const rez = await this.api(`/api/products/${id}`, 'DELETE');
 
-    async getAllCategories(){
-        
-        try{
-            const rez = await this.api('/api/categories');
-
-            if(rez.status === 200){
-                return rez.json();
-            }else{
-                let data = await rez.json();
-                return data.error.message;
-            }
-
-        }catch(e){
-            throw new Error(e);
-        }
-        
+      if (rez.status === 204) {
+        return 'delete success';
+      } else {
+        let data = await rez.json();
+        return data.error.message;
+      }
+    } catch (e) {
+      throw new Error(e);
     }
+  }
 
-    async getCategoryByID(id){
-        
-        try{
-            const rez = await this.api(`/api/categories/${id}`);
+  // CATEGORIES
 
-            if(rez.status === 200){
-                return rez.json();
-            }else{
-                let data = await rez.json();
-                return data.error.message;
-            }
+  async getAllCategories() {
+    try {
+      const rez = await this.api('/api/categories');
 
-        }catch(e){
-            throw new Error(e);
-        }
-        
+      if (rez.status === 200) {
+        return rez.json();
+      } else {
+        let data = await rez.json();
+        return data.error.message;
+      }
+    } catch (e) {
+      throw new Error(e);
     }
+  }
 
-    async createCategory(newObj){
-        
-        try{
-            const rez = await this.api(`/api/categories`, 'POST', newObj);
+  async getCategoryByID(id) {
+    try {
+      const rez = await this.api(`/api/categories/${id}`);
 
-            if(rez.status === 204){
-                return "create success";
-            }else{
-                let data = await rez.json();
-                return data.error.message;
-            }
-
-        }catch(e){
-            throw new Error(e);
-        }
-        
+      if (rez.status === 200) {
+        return rez.json();
+      } else {
+        let data = await rez.json();
+        return data.error.message;
+      }
+    } catch (e) {
+      throw new Error(e);
     }
+  }
 
-    async updateCategory(newObj,id){
-        
-        try{
-            const rez = await this.api(`/api/categories/${id}`, 'PUT', newObj);
+  async createCategory(newObj) {
+    try {
+      const rez = await this.api(`/api/categories`, 'POST', newObj);
 
-            if(rez.status === 204){
-                return "update success";
-            }else{
-                let data = await rez.json();
-                return data.error.message;
-            }
-
-        }catch(e){
-            throw new Error(e);
-        }
-        
+      if (rez.status === 204) {
+        return 'create success';
+      } else {
+        let data = await rez.json();
+        return data.error.message;
+      }
+    } catch (e) {
+      throw new Error(e);
     }
+  }
 
-    async deleteCategory(id){
-        
-        try{
-            const rez = await this.api(`/api/categories/${id}`, 'DELETE');
+  async updateCategory(newObj, id) {
+    try {
+      const rez = await this.api(`/api/categories/${id}`, 'PUT', newObj);
 
-            if(rez.status === 204){
-                return "delete success";
-            }else{
-                let data = await rez.json();
-                return data.error.message;
-            }
-
-        }catch(e){
-            throw new Error(e);
-        }
-        
+      if (rez.status === 204) {
+        return 'update success';
+      } else {
+        let data = await rez.json();
+        return data.error.message;
+      }
+    } catch (e) {
+      throw new Error(e);
     }
+  }
 
-    // ORDERS
+  async deleteCategory(id) {
+    try {
+      const rez = await this.api(`/api/categories/${id}`, 'DELETE');
 
-    async getAllOrders(){
-        
-        try{
-            const rez = await this.api('/api/orders');
-
-            if(rez.status === 200){
-                return rez.json();
-            }else{
-                let data = await rez.json();
-                return data.error.message;
-            }
-
-        }catch(e){
-            throw new Error(e);
-        }
-        
+      if (rez.status === 204) {
+        return 'delete success';
+      } else {
+        let data = await rez.json();
+        return data.error.message;
+      }
+    } catch (e) {
+      throw new Error(e);
     }
+  }
 
-    async getOrderByID(id){
-        
-        try{
-            const rez = await this.api(`/api/orders/${id}`);
+  // ORDERS
 
-            if(rez.status === 200){
-                return rez.json();
-            }else{
-                let data = await rez.json();
-                return data.error.message;
-            }
+  async getAllOrders() {
+    try {
+      const rez = await this.api('/api/orders');
 
-        }catch(e){
-            throw new Error(e);
-        }
-        
+      if (rez.status === 200) {
+        return rez.json();
+      } else {
+        let data = await rez.json();
+        return data.error.message;
+      }
+    } catch (e) {
+      throw new Error(e);
     }
+  }
 
-    async createOrder(newObj){
-        
-        try{
-            const rez = await this.api(`/api/orders`, 'POST', newObj);
+  async getOrderByID(id) {
+    try {
+      const rez = await this.api(`/api/orders/${id}`);
 
-            if(rez.status === 204){
-                return "create success";
-            }else{
-                let data = await rez.json();
-                return data.error.message;
-            }
-
-        }catch(e){
-            throw new Error(e);
-        }
-        
+      if (rez.status === 200) {
+        return rez.json();
+      } else {
+        let data = await rez.json();
+        return data.error.message;
+      }
+    } catch (e) {
+      throw new Error(e);
     }
+  }
 
-    async updateOrder(newObj,id){
-        
-        try{
-            const rez = await this.api(`/api/orders/${id}`, 'PUT', newObj);
+  async createOrder(newObj) {
+    try {
+      const rez = await this.api(`/api/orders`, 'POST', newObj);
 
-            if(rez.status === 204){
-                return "update success";
-            }else{
-                let data = await rez.json();
-                return data.error.message;
-            }
-
-        }catch(e){
-            throw new Error(e);
-        }
-        
+      if (rez.status === 204) {
+        return 'create success';
+      } else {
+        let data = await rez.json();
+        return data.error.message;
+      }
+    } catch (e) {
+      throw new Error(e);
     }
+  }
 
-    async deleteOrder(id){
-        
-        try{
-            const rez = await this.api(`/api/orders/${id}`, 'DELETE');
+  async updateOrder(newObj, id) {
+    try {
+      const rez = await this.api(`/api/orders/${id}`, 'PUT', newObj);
 
-            if(rez.status === 204){
-                return "delete success";
-            }else{
-                let data = await rez.json();
-                return data.error.message;
-            }
-
-        }catch(e){
-            throw new Error(e);
-        }
-        
+      if (rez.status === 204) {
+        return 'update success';
+      } else {
+        let data = await rez.json();
+        return data.error.message;
+      }
+    } catch (e) {
+      throw new Error(e);
     }
+  }
 
-    // Product Categories
+  async deleteOrder(id) {
+    try {
+      const rez = await this.api(`/api/orders/${id}`, 'DELETE');
 
-    async getAllProductCategories(){
-    
-        try{
-            const rez = await this.api('/api/product-categories');
-
-            if(rez.status === 200){
-                return rez.json();
-            }else{
-                let data = await rez.json();
-                return data.error.message;
-            }
-
-        }catch(e){
-            throw new Error(e);
-        }
-        
+      if (rez.status === 204) {
+        return 'delete success';
+      } else {
+        let data = await rez.json();
+        return data.error.message;
+      }
+    } catch (e) {
+      throw new Error(e);
     }
+  }
 
-    async getProductCategoriesByID(id){
-        
-        try{
-            const rez = await this.api(`/api/product-categories/${id}`);
+  // Product Categories
 
-            if(rez.status === 200){
-                return rez.json();
-            }else{
-                let data = await rez.json();
-                return data.error.message;
-            }
+  async getAllProductCategories() {
+    try {
+      const rez = await this.api('/api/product-categories');
 
-        }catch(e){
-            throw new Error(e);
-        }
-        
+      if (rez.status === 200) {
+        return rez.json();
+      } else {
+        let data = await rez.json();
+        return data.error.message;
+      }
+    } catch (e) {
+      throw new Error(e);
     }
+  }
 
-    async createProductCategory(newObj){
-        
-        try{
-            const rez = await this.api(`/api/product-categories`, 'POST', newObj);
+  async getProductCategoriesByID(id) {
+    try {
+      const rez = await this.api(`/api/product-categories/${id}`);
 
-            if(rez.status === 204){
-                return "create success";
-            }else{
-                let data = await rez.json();
-                return data.error.message;
-            }
-
-        }catch(e){
-            throw new Error(e);
-        }
-        
+      if (rez.status === 200) {
+        return rez.json();
+      } else {
+        let data = await rez.json();
+        return data.error.message;
+      }
+    } catch (e) {
+      throw new Error(e);
     }
-    
-    async updateProductCategory(newObj,id){
-        
-        try{
-            const rez = await this.api(`/api/product-categories/${id}`, 'PUT', newObj);
+  }
 
-            if(rez.status === 204){
-                return "update success";
-            }else{
-                let data = await rez.json();
-                return data.error.message;
-            }
+  async createProductCategory(newObj) {
+    try {
+      const rez = await this.api(`/api/product-categories`, 'POST', newObj);
 
-        }catch(e){
-            throw new Error(e);
-        }
-        
+      if (rez.status === 204) {
+        return 'create success';
+      } else {
+        let data = await rez.json();
+        return data.error.message;
+      }
+    } catch (e) {
+      throw new Error(e);
     }
-    
-    async deleteProductCategory(id){
-        
-        try{
-            const rez = await this.api(`/api/product-categories/${id}`, 'DELETE');
+  }
 
-            if(rez.status === 204){
-                return "delete success";
-            }else{
-                let data = await rez.json();
-                return data.error.message;
-            }
+  async updateProductCategory(newObj, id) {
+    try {
+      const rez = await this.api(
+        `/api/product-categories/${id}`,
+        'PUT',
+        newObj
+      );
 
-        }catch(e){
-            throw new Error(e);
-        }
-        
+      if (rez.status === 204) {
+        return 'update success';
+      } else {
+        let data = await rez.json();
+        return data.error.message;
+      }
+    } catch (e) {
+      throw new Error(e);
     }
+  }
 
-    // Order Details
+  async deleteProductCategory(id) {
+    try {
+      const rez = await this.api(`/api/product-categories/${id}`, 'DELETE');
 
-    async getAllOrderDetailsFiltred(id){
-    
-        try{
-            const rez = await this.api(`/api/product-categories/join-all/${id}`);
-
-            if(rez.status === 200){
-                return rez.json();
-            }else{
-                let data = await rez.json();
-                return data.error.message;
-            }
-
-        }catch(e){
-            throw new Error(e);
-        }
-        
+      if (rez.status === 204) {
+        return 'delete success';
+      } else {
+        let data = await rez.json();
+        return data.error.message;
+      }
+    } catch (e) {
+      throw new Error(e);
     }
+  }
 
-    async getAllOrderDetails(){
-    
-        try{
-            const rez = await this.api('/api/orders-details');
+  // Order Details
 
-            if(rez.status === 200){
-                return rez.json();
-            }else{
-                let data = await rez.json();
-                return data.error.message;
-            }
+  async getAllOrderDetailsFiltred(id) {
+    try {
+      const rez = await this.api(`/api/product-categories/join-all/${id}`);
 
-        }catch(e){
-            throw new Error(e);
-        }
-        
+      if (rez.status === 200) {
+        return rez.json();
+      } else {
+        let data = await rez.json();
+        return data.error.message;
+      }
+    } catch (e) {
+      throw new Error(e);
     }
+  }
 
-    async getOrderDetailByID(id){
-        
-        try{
-            const rez = await this.api(`/api/orders-details/${id}`);
+  async getAllOrderDetails() {
+    try {
+      const rez = await this.api('/api/orders-details');
 
-            if(rez.status === 200){
-                return rez.json();
-            }else{
-                let data = await rez.json();
-                return data.error.message;
-            }
-
-        }catch(e){
-            throw new Error(e);
-        }
-        
+      if (rez.status === 200) {
+        return rez.json();
+      } else {
+        let data = await rez.json();
+        return data.error.message;
+      }
+    } catch (e) {
+      throw new Error(e);
     }
+  }
 
-    async createOrderDetail(newObj){
-        
-        try{
-            const rez = await this.api(`/api/orders-details`, 'POST', newObj);
+  async getOrderDetailByID(id) {
+    try {
+      const rez = await this.api(`/api/orders-details/${id}`);
 
-            if(rez.status === 204){
-                return "create success";
-            }else{
-                let data = await rez.json();
-                return data.error.message;
-            }
-
-        }catch(e){
-            throw new Error(e);
-        }
-        
+      if (rez.status === 200) {
+        return rez.json();
+      } else {
+        let data = await rez.json();
+        return data.error.message;
+      }
+    } catch (e) {
+      throw new Error(e);
     }
-    
-    async updateOrderDetail(newObj,id){
-        
-        try{
-            const rez = await this.api(`/api/orders-details/${id}`, 'PUT', newObj);
+  }
 
-            if(rez.status === 204){
-                return "update success";
-            }else{
-                let data = await rez.json();
-                return data.error.message;
-            }
+  async createOrderDetail(newObj) {
+    try {
+      const rez = await this.api(`/api/orders-details`, 'POST', newObj);
 
-        }catch(e){
-            throw new Error(e);
-        }
-        
+      if (rez.status === 204) {
+        return 'create success';
+      } else {
+        let data = await rez.json();
+        return data.error.message;
+      }
+    } catch (e) {
+      throw new Error(e);
     }
-    
-    async deleteOrderDetail(id){
-        
-        try{
-            const rez = await this.api(`/api/orders-details/${id}`, 'DELETE');
+  }
 
-            if(rez.status === 204){
-                return "delete success";
-            }else{
-                let data = await rez.json();
-                return data.error.message;
-            }
+  async updateOrderDetail(newObj, id) {
+    try {
+      const rez = await this.api(`/api/orders-details/${id}`, 'PUT', newObj);
 
-        }catch(e){
-            throw new Error(e);
-        }
-        
+      if (rez.status === 204) {
+        return 'update success';
+      } else {
+        let data = await rez.json();
+        return data.error.message;
+      }
+    } catch (e) {
+      throw new Error(e);
     }
+  }
 
+  async deleteOrderDetail(id) {
+    try {
+      const rez = await this.api(`/api/orders-details/${id}`, 'DELETE');
 
-    
-
-    async getAllImages(){
-        
-        try{
-            const rez = await this.api('/api/images');
-
-            if(rez.status === 200){
-                return rez.json();
-            }else{
-                let data = await rez.json();
-                return data.error.message;
-            }
-
-        }catch(e){
-            throw new Error(e);
-        }
-        
+      if (rez.status === 204) {
+        return 'delete success';
+      } else {
+        let data = await rez.json();
+        return data.error.message;
+      }
+    } catch (e) {
+      throw new Error(e);
     }
+  }
+
+  async getAllImages() {
+    try {
+      const rez = await this.api('/api/images');
+
+      if (rez.status === 200) {
+        return rez.json();
+      } else {
+        let data = await rez.json();
+        return data.error.message;
+      }
+    } catch (e) {
+      throw new Error(e);
+    }
+  }
 }
 
 export default Api;
